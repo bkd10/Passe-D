@@ -10,6 +10,7 @@ import { Callout, Figure } from "./editor-extensions";
 import { MediaPicker, thumb, type MediaItem } from "./media-picker";
 import { Toolbar } from "./article-editor";
 import { parseParisLocal } from "@/lib/util";
+import { SocialShare } from "@/components/admin/social-share";
 
 type Opt = { id: number; name: string };
 type Action = "publish" | "schedule" | "review" | "draft";
@@ -179,6 +180,18 @@ export function QuickPublishForm({ cats, people, me, canPublish, siteUrl }: { ca
           <Link className="btn ghost" href={`/admin/articles/${done.id}`}>Modifier dans l&apos;éditeur complet</Link>
           <button type="button" className="btn ghost" onClick={reset}>Publier un autre article</button>
         </div>
+        {live && (
+          <div className="qp-social">
+            <h3>Le poster sur les réseaux</h3>
+            <SocialShare
+              slug={done.slug}
+              siteUrl={siteUrl}
+              title={d.title}
+              dek={d.dek}
+              categoryName={cats.find((c) => String(c.id) === String(d.categoryId))?.name}
+            />
+          </div>
+        )}
       </div>
     );
   }

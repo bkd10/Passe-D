@@ -15,7 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = await getPublicArticle(slug);
   if (!a) return { title: "Article introuvable" };
   const art = a.article;
-  let og = a.cover?.variants?.lg || a.cover?.url;
+  // Par défaut, l'aperçu de lien est le visuel Passe D de l'article (titre + photo + logo).
+  let og: string | undefined = `${SITE_URL}/articles/${art.slug}/visuel?format=og`;
   if (art.ogImageId) {
     const db = await getDb();
     const [m] = await db.select().from(schema.media).where(eq(schema.media.id, art.ogImageId)).limit(1);
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `${SITE_URL}/articles/${art.slug}`,
-      images: og ? [{ url: og }] : undefined,
+      images: og ? [{ url: og, width: art.ogImageId ? undefined : 1200, height: art.ogImageId ? undefined : 630 }] : undefined,
       publishedTime: art.publishedAt?.toISOString(),
       modifiedTime: (art.updatedContentAt ?? art.publishedAt)?.toISOString(),
       section: a.category?.name,

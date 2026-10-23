@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@electric-sql/pglite", "sharp", "pg"],
   images: { unoptimized: true },
   poweredByHeader: false,
+  // Polices utilisées pour fabriquer les visuels réseaux sociaux
+  outputFileTracingIncludes: { "/**/*": ["./assets/fonts/**"] },
   async redirects() {
     // Anciennes adresses de passe-d.net
     return [

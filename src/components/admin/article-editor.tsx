@@ -13,6 +13,7 @@ import { StatusPill } from "./bits";
 import type { Status } from "@/db/schema";
 import { STATUS_LABELS } from "@/lib/permissions";
 import { slugify, toParisLocal, parseParisLocal } from "@/lib/util";
+import { SocialShare } from "@/components/admin/social-share";
 
 type Opt = { id: number; name: string };
 type Note = { id: number; body: string; kind: string; resolved: boolean; createdAt: string; author: string | null };
@@ -476,6 +477,23 @@ export function ArticleEditor({
               )}
             </div>
           </section>
+
+          {isLive && (
+            <section className="panel">
+              <h2>Réseaux sociaux</h2>
+              <SocialShare
+                slug={f.slug}
+                siteUrl={options.siteUrl}
+                title={f.title}
+                dek={f.dek}
+                categoryName={options.cats.find((c) => c.id === f.categoryId)?.name}
+                mercatoStatus={f.mercatoStatus}
+                sponsored={f.sponsored}
+                sponsorName={f.sponsorName}
+                tags={f.tagNames}
+              />
+            </section>
+          )}
 
           {/* Organisation */}
           <section className="panel">

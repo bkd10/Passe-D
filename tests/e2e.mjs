@@ -161,6 +161,15 @@ assert.equal((await pp.request.get(`${BASE}/auteurs/ines-journaliste`)).status()
 const search = await (await pp.request.get(`${BASE}/recherche?q=penaltys`)).text();
 assert.ok(search.includes("Le gardien de Bondy"));
 log("sitemap, RSS, rubrique, sujet, auteur, recherche");
+for (const format of ["post", "story", "og"]) {
+  const v = await pp.request.get(`${BASE}/articles/${slug}/visuel?format=${format}`);
+  assert.equal(v.status(), 200);
+  assert.equal(v.headers()["content-type"], "image/png");
+}
+assert.equal((await pp.request.get(`${BASE}/articles/article-inexistant/visuel`)).status(), 404);
+assert.ok((await (await pp.request.get(`${BASE}/articles/${slug}`)).text()).includes(`/articles/${slug}/visuel?format=og`));
+assert.ok((await (await pp.request.get(`${BASE}/rss.xml`)).text()).includes(`/articles/${slug}/visuel?format=post`));
+log("visuels réseaux sociaux (Instagram, story, aperçu de lien) + flux RSS illustré");
 
 // 8. Programmation d'un second article
 const created = await page.request.post(`${BASE}/admin/articles/nouveau`).catch(() => null);
