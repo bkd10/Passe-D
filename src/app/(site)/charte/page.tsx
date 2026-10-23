@@ -18,7 +18,7 @@ export default function Charte() {
       <header className="page-head">
         <span className="kicker">Le journal</span>
         <h1>Notre charte</h1>
-        <p>Le football autrement, raconté avec exigence.</p>
+        <p>Le football raconté avec exigence.</p>
       </header>
       <div className="prose" style={{ maxWidth: 760, padding: "36px 0 60px" }}>
         {RULES.map(([t, d], i) => (

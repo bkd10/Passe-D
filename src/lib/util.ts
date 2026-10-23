@@ -74,4 +74,4 @@ const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL || proce
 // Sans adresse définie, on prend celle que Vercel attribue au site (utile avant de brancher le nom de domaine).
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000")).replace(/\/$/, "");
 export const SITE_NAME = "Passe D";
-export const SITE_TAGLINE = "Le football autrement.";
+export const SITE_TAGLINE = "Média football";

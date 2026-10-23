@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SITE_TAGLINE } from "@/lib/util";
 
 export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
   return (
@@ -9,7 +8,7 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
           <div>
             <h4>Passe D</h4>
             <p className="dek" style={{ margin: 0, maxWidth: 360 }}>
-              {SITE_TAGLINE} Talents, terrains amateurs, métiers de l&apos;ombre et idées qui changent le jeu.
+              Talents, terrains amateurs, métiers de l&apos;ombre et idées qui changent le jeu.
             </p>
           </div>
           <div>

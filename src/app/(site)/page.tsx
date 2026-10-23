@@ -66,7 +66,6 @@ export default async function Home() {
               Passe <span>D</span>
             </h1>
             <p className="launch-sub">Média</p>
-            <p className="launch-tagline">Le football autrement.</p>
             <p className="launch-text">Talents, terrains amateurs, mercato vérifié et métiers de l&apos;ombre. Les premiers articles arrivent très bientôt.</p>
             <div className="launch-actions">
               <a className="btn" href="#newsletter">Être prévenu du lancement</a>
@@ -126,9 +125,9 @@ export default async function Home() {
 
       <section className="manifesto" aria-label="Notre promesse">
         <span className="display">
-          Le football <em>autrement.</em>
+          Notre <em>promesse.</em>
         </span>
-        <p>Des talents avant tout le monde, des terrains amateurs, les métiers de l&apos;ombre et les idées qui changent le jeu. Vérifié, sourcé, raconté autrement.</p>
+        <p>Des talents avant tout le monde, des terrains amateurs, les métiers de l&apos;ombre et les idées qui changent le jeu. Vérifié et sourcé.</p>
         <Link className="btn ghost" href="/charte">Notre charte</Link>
       </section>
 
