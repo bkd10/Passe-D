@@ -70,6 +70,8 @@ export function toParisLocal(d: Date | string | null | undefined): string {
   return parts.replace(" ", "T");
 }
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL;
+// Sans adresse définie, on prend celle que Vercel attribue au site (utile avant de brancher le nom de domaine).
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000")).replace(/\/$/, "");
 export const SITE_NAME = "Quotidien Sportif";
 export const SITE_TAGLINE = "Le football que tu ne regardes pas encore.";
