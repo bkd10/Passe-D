@@ -1,17 +1,27 @@
 import { useId } from "react";
 
-/** Monogramme Passe D Média : le P blanc, le D or, le bouton lecture et le cadre caméra. */
+/** Monogramme Passe D Média : le P blanc, le D or, le bouton lecture, le cadre caméra et la pelouse. */
 export function LogoMark({ className = "logo-mark" }: { className?: string }) {
   const gold = useId();
+  const grass = useId();
   const g = `url(#${gold})`;
   return (
-    <svg className={className} viewBox="0 0 64 48" aria-hidden focusable="false">
+    <svg className={className} viewBox="0 0 64 54" aria-hidden focusable="false">
       <defs>
         <linearGradient id={gold} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#f6c950" />
           <stop offset="1" stopColor="#d9922a" />
         </linearGradient>
+        <linearGradient id={grass} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#4cc96a" />
+          <stop offset="1" stopColor="#1f7a3a" />
+        </linearGradient>
       </defs>
+      <rect x="6" y="46" width="46" height="6" rx="1.6" fill={`url(#${grass})`} />
+      <g fill="none" stroke="#f3f3f0" strokeWidth=".5">
+        <path d="M29 46v6M6 47.6h2.4v2.8H6M52 47.6h-2.4v2.8H52" />
+        <circle cx="29" cy="49" r="1.8" />
+      </g>
       <g fill="none" stroke={g} strokeWidth="2.4" strokeLinecap="round">
         <path d="M5 14V8a3 3 0 0 1 3-3h5M44 5h4a3 3 0 0 1 3 3v6M5 34v6a3 3 0 0 0 3 3h3M51 34v6a3 3 0 0 1-3 3h-3" />
       </g>
