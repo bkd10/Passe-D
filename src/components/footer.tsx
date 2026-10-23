@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/logo";
 
 export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
   return (
@@ -6,7 +7,9 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <h4>Passe D</h4>
+            <Link href="/" className="logo footer-logo" aria-label="Passe D Média, accueil">
+              <Logo />
+            </Link>
             <p className="dek" style={{ margin: 0, maxWidth: 360 }}>
               Talents, terrains amateurs, métiers de l&apos;ombre et idées qui changent le jeu.
             </p>
@@ -38,9 +41,9 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
             </ul>
           </div>
         </div>
-        <div className="big-sign" aria-hidden>Passe D</div>
+        <div className="big-sign" aria-hidden>Passe <span>D</span></div>
         <div className="legal meta">
-          <span>© {new Date().getFullYear()} Passe D. Contenus sponsorisés toujours signalés.</span>
+          <span>© {new Date().getFullYear()} Passe D Média. Contenus sponsorisés toujours signalés.</span>
           <span>Mesure d&apos;audience sans cookie.</span>
         </div>
       </div>

@@ -3,6 +3,7 @@ import type { Card } from "@/lib/queries";
 import { FORMAT_LABELS, MERCATO_LABELS, moduleBySlug } from "@/lib/editorial";
 import { timeAgo } from "@/lib/util";
 import type { Format, MercatoStatus } from "@/db/schema";
+import { LogoMark } from "@/components/logo";
 
 export function pickImage(c: { coverUrl: string | null; coverVariants: Record<string, string> | null }, size: "sm" | "md" | "lg" = "md") {
   if (!c.coverUrl) return null;
@@ -13,6 +14,16 @@ export function srcSet(c: { coverUrl: string | null; coverVariants: Record<strin
   const v = c.coverVariants ?? {};
   const parts = [v.sm && `${v.sm} 480w`, v.md && `${v.md} 960w`, v.lg && `${v.lg} 1600w`].filter(Boolean);
   return parts.length ? parts.join(", ") : undefined;
+}
+
+/** Visuel de remplacement aux couleurs de Passe D quand un article n'a pas de photo. */
+export function CoverFallback({ label, small = false }: { label?: string | null; small?: boolean }) {
+  return (
+    <div className={`cover-fallback${small ? " small" : ""}`} aria-hidden>
+      <LogoMark className="cf-mark" />
+      {!small && label && <span className="cf-label">{label}</span>}
+    </div>
+  );
 }
 
 export function Kicker({ c }: { c: Card }) {
@@ -58,7 +69,7 @@ export function ArticleCard({
           {img ? (
             <img src={img} srcSet={srcSet(c)} sizes={sizes} alt={c.coverAlt ?? ""} loading="lazy" decoding="async" />
           ) : (
-            <div className="placeholder" aria-hidden>{c.categoryName ?? "Passe D"}</div>
+            <CoverFallback label={c.categoryName} small={variant === "row"} />
           )}
         </div>
       )}

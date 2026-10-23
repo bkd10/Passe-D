@@ -37,15 +37,18 @@ export function LogoMark({ className = "logo-mark" }: { className?: string }) {
   );
 }
 
-/** Logo complet : monogramme + « PASSE D », le D en or. */
+/** Logo complet : monogramme + « PASSE D » avec « MÉDIA » dessous. */
 export function Logo({ suffix }: { suffix?: string }) {
   return (
     <>
       <LogoMark />
       {suffix ?? (
-        <>
-          Passe<span className="logo-d">D</span>
-        </>
+        <span className="logo-words">
+          <span>
+            Passe<span className="logo-d">D</span>
+          </span>
+          <span className="logo-media">Média</span>
+        </span>
       )}
     </>
   );

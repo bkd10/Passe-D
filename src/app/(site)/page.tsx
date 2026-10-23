@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArticleCard, Kicker, pickImage, srcSet } from "@/components/card";
+import { ArticleCard, CoverFallback, Kicker, pickImage, srcSet } from "@/components/card";
 import { LiveFeed } from "@/components/live-feed";
 import { Poll } from "@/components/poll";
 import { Newsletter } from "@/components/newsletter";
@@ -103,7 +103,7 @@ export default async function Home() {
       {/* A. La une */}
       <section className={`hero ${secondary.length ? "" : "solo"}`} aria-label="À la une">
         <article className="hero-main" style={{ ["--cat" as string]: lead.categoryColor ?? undefined }}>
-          {leadImg && <img src={leadImg} srcSet={srcSet(lead)} sizes="(max-width: 1080px) 100vw, 62vw" alt={lead.coverAlt ?? ""} fetchPriority="high" />}
+          {leadImg ? <img src={leadImg} srcSet={srcSet(lead)} sizes="(max-width: 1080px) 100vw, 62vw" alt={lead.coverAlt ?? ""} fetchPriority="high" /> : <LogoMark className="hero-watermark" />}
           <div className="inner">
             <Kicker c={lead} />
             <h1>
@@ -205,7 +205,7 @@ export default async function Home() {
         <section className="section" aria-label="Le talent à suivre">
           <article className="talent" style={{ position: "relative" }}>
             <div className="photo">
-              {pickImage(talentPick, "lg") && <img src={pickImage(talentPick, "lg")!} alt={talentPick.coverAlt ?? ""} loading="lazy" />}
+              {pickImage(talentPick, "lg") ? <img src={pickImage(talentPick, "lg")!} alt={talentPick.coverAlt ?? ""} loading="lazy" /> : <CoverFallback label="Talent" />}
             </div>
             <div className="body">
               <span className="label">● Le talent à suivre</span>
@@ -248,7 +248,7 @@ export default async function Home() {
           <div className="video-rail">
             {videos.map((v) => (
               <article key={v.id} className="video-card">
-                {pickImage(v, "md") && <img src={pickImage(v, "md")!} alt={v.coverAlt ?? ""} loading="lazy" />}
+                {pickImage(v, "md") ? <img src={pickImage(v, "md")!} alt={v.coverAlt ?? ""} loading="lazy" /> : <CoverFallback small />}
                 <span className="play" aria-hidden><PlayIcon size={18} /></span>
                 <div className="inner">
                   <span className="kicker" style={{ color: "#ddd" }}>{v.categoryName}</span>

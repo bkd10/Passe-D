@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Card } from "@/lib/queries";
+import { CoverFallback } from "@/components/card";
 
 type Cat = { slug: string; name: string };
 const FORMATS = [
@@ -141,7 +142,7 @@ export function LiveFeed({ initial, cats }: { initial: Card[]; cats: Cat[] }) {
                 <h3 className="title"><Link href={`/articles/${a.slug}`}>{a.title}</Link></h3>
                 {a.dek && <p className="dek" style={{ margin: 0, fontSize: 15 }}>{a.dek}</p>}
               </div>
-              <div className="thumb">{a.coverUrl && <img src={a.coverVariants?.sm || a.coverUrl} alt="" loading="lazy" />}</div>
+              <div className="thumb">{a.coverUrl ? <img src={a.coverVariants?.sm || a.coverUrl} alt="" loading="lazy" /> : <CoverFallback small />}</div>
             </li>
           ))}
         </ul>
