@@ -58,7 +58,7 @@ export function ArticleCard({
           {img ? (
             <img src={img} srcSet={srcSet(c)} sizes={sizes} alt={c.coverAlt ?? ""} loading="lazy" decoding="async" />
           ) : (
-            <div className="placeholder" aria-hidden>{c.categoryName ?? "QS"}</div>
+            <div className="placeholder" aria-hidden>{c.categoryName ?? "Passe D"}</div>
           )}
         </div>
       )}

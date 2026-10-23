@@ -1,4 +1,5 @@
 import { and, eq, gt } from "drizzle-orm";
+import { LogoMark } from "@/components/logo";
 import { InviteForm } from "@/components/auth-forms";
 import { getDb, schema } from "@/db";
 import { ROLE_LABELS } from "@/lib/permissions";
@@ -16,7 +17,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
     .limit(1);
   return (
     <div className="auth-card">
-      <span className="logo"><span className="logo-mark">QS</span>Rédaction</span>
+      <span className="logo"><LogoMark />Rédaction</span>
       {u ? (
         <>
           <h1>Bienvenue {u.name.split(" ")[0]}</h1>

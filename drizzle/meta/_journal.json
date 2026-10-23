@@ -15,6 +15,13 @@
       "when": 1792752000000,
       "tag": "0001_archive_at",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792760000000,
+      "tag": "0002_passe_d",
+      "breakpoints": true
     }
   ]
 }

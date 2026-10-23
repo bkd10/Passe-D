@@ -1,4 +1,4 @@
-# Quotidien Sportif
+# Passe D
 
 Média football nouvelle génération : site public éditorialisé et back-office de rédaction
 (articles, médias, équipe, relecture, programmation, SEO). Next.js 15, PostgreSQL (Supabase), Drizzle.

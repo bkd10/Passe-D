@@ -36,7 +36,7 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <span className="kicker">
               <span className="dot" />
-              {a.category ? <Link href={`/${a.category.slug}`}>{a.category.name}</Link> : "Quotidien Sportif"}
+              {a.category ? <Link href={`/${a.category.slug}`}>{a.category.name}</Link> : "Passe D"}
               {mod ? ` · ${mod.name}` : art.format !== "article" ? ` · ${FORMAT_LABELS[art.format]}` : ""}
             </span>
             {art.sponsored && <span className="badge sponsor">Contenu sponsorisé{art.sponsorName ? ` · ${art.sponsorName}` : ""}</span>}

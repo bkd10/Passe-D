@@ -5,6 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { logoutAction } from "@/app/admin/(auth)/actions";
 import { MenuIcon } from "@/components/icons";
+import { LogoMark } from "@/components/logo";
 
 type NavItem = { href: string; label: string; count?: number } | { sep: string };
 
@@ -33,11 +34,11 @@ export function AdminShell({
         <button className="icon-btn" style={{ color: "#fff" }} onClick={() => setOpen(true)} aria-label="Menu">
           <MenuIcon />
         </button>
-        <span className="logo"><span className="logo-mark">QS</span>Rédaction</span>
+        <span className="logo"><LogoMark />Rédaction</span>
         {canCreate ? <Link className="btn sm" href="/admin/articles/publier">+ Article</Link> : <span />}
       </div>
       <aside className="adm-side" data-open={open} onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
-        <Link href="/admin" className="logo"><span className="logo-mark">QS</span>Rédaction</Link>
+        <Link href="/admin" className="logo"><LogoMark />Rédaction</Link>
         {canCreate && <Link className="btn new-btn" href="/admin/articles/publier">+ Publier un article</Link>}
         {nav.map((n, i) =>
           "sep" in n ? (

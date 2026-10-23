@@ -26,7 +26,7 @@ export async function saveCategoryAction(fd: FormData) {
       name: z.string().trim().min(2).max(60),
       slug: z.string().trim().max(60).optional(),
       description: z.string().trim().max(300).default(""),
-      color: z.string().regex(/^#[0-9a-fA-F]{6}$/).default("#d7ff3a"),
+      color: z.string().regex(/^#[0-9a-fA-F]{6}$/).default("#f2b631"),
       parentId: z.coerce.number().int().optional(),
       position: z.coerce.number().int().default(0),
     })

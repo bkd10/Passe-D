@@ -5,10 +5,10 @@
 export const LAUNCH_ARTICLES = [
   {
     category: "actualites",
-    title: "Bienvenue sur Quotidien Sportif",
-    slug: "bienvenue-sur-quotidien-sportif",
+    title: "Bienvenue sur Passe D",
+    slug: "bienvenue-sur-passe-d",
     dek: "Le football professionnel, le football amateur, les talents de demain et ceux qui font vivre le jeu en coulisses. Voici ce que vous trouverez ici, et ce à quoi nous nous engageons.",
-    bodyHtml: `<p>Quotidien Sportif est un média consacré au football, à tous ses étages. Le très haut niveau bien sûr, mais aussi les terrains de district, les centres de formation, les tribunes et les métiers qu'on ne voit jamais à la télévision.</p>
+    bodyHtml: `<p>Passe D est un média consacré au football, à tous ses étages. Le très haut niveau bien sûr, mais aussi les terrains de district, les centres de formation, les tribunes et les métiers qu'on ne voit jamais à la télévision.</p>
 <h2>Ce que nous couvrons</h2>
 <ul><li><p><strong>Actualités</strong> : l'essentiel du jour, vérifié et remis en perspective.</p></li><li><p><strong>Talents</strong> : des portraits et des profils à suivre, de la formation au monde pro.</p></li><li><p><strong>Football amateur</strong> : les clubs, les résultats, les histoires locales, souvent racontées avec les clubs eux-mêmes.</p></li><li><p><strong>Mercato</strong> : les transferts, avec pour chaque information son niveau de confirmation.</p></li><li><p><strong>Métiers du football</strong> : scouts, analystes, intendants, arbitres, jardiniers de pelouse.</p></li><li><p><strong>Innovations, vidéos et culture football</strong> : la data, les méthodes, les supporters, l'histoire.</p></li></ul>
 <h2>Nos engagements</h2>
@@ -22,7 +22,7 @@ export const LAUNCH_ARTICLES = [
     title: "Clubs amateurs : envoyez-nous vos résultats et vos histoires",
     slug: "clubs-amateurs-envoyez-nous-vos-resultats",
     dek: "Un résultat, un exploit, un bénévole qui mérite d'être connu ? Le formulaire Contribuer est fait pour vous. Voici comment il fonctionne.",
-    bodyHtml: `<p>Le football amateur se raconte mieux avec ceux qui le vivent chaque week-end. C'est pourquoi Quotidien Sportif ouvre une porte directe aux clubs.</p>
+    bodyHtml: `<p>Le football amateur se raconte mieux avec ceux qui le vivent chaque week-end. C'est pourquoi Passe D ouvre une porte directe aux clubs.</p>
 <h2>Comment ça marche</h2>
 <ol><li><p>Rendez-vous sur la page <a href="/contribuer">Contribuer</a>.</p></li><li><p>Choisissez le type d'envoi : un résultat, une histoire, un portrait ou une annonce.</p></li><li><p>Indiquez votre club et un moyen de vous recontacter, puis décrivez ce qui s'est passé. Vous pouvez joindre une photo dont vous détenez les droits.</p></li></ol>
 <h2>Ce qui se passe ensuite</h2>
@@ -34,7 +34,7 @@ export const LAUNCH_ARTICLES = [
     category: "mercato",
     title: "Mercato : comment lire nos statuts",
     slug: "mercato-comment-lire-nos-statuts",
-    dek: "Rumeur, intérêt, négociations, accord, transfert confirmé : sur Quotidien Sportif, chaque information mercato affiche clairement où elle en est.",
+    dek: "Rumeur, intérêt, négociations, accord, transfert confirmé : sur Passe D, chaque information mercato affiche clairement où elle en est.",
     bodyHtml: `<p>Le mercato est la période où circulent le plus d'informations, et le plus d'informations fausses. Pour que vous sachiez toujours à quoi vous en tenir, chaque article mercato porte une étiquette qui indique son niveau de confirmation.</p>
 <h2>Les six statuts</h2>
 <ul><li><p><strong>Rumeur</strong> : information non vérifiée, relayée avec prudence.</p></li><li><p><strong>Intérêt rapporté</strong> : un intérêt est rapporté par une ou plusieurs sources.</p></li><li><p><strong>Négociations rapportées</strong> : des discussions sont rapportées entre les parties.</p></li><li><p><strong>Accord annoncé</strong> : un accord est annoncé, mais pas encore officialisé.</p></li><li><p><strong>Transfert confirmé</strong> : officialisé par au moins un des clubs.</p></li><li><p><strong>Démenti / corrigé</strong> : l'information a été démentie ou corrigée.</p></li></ul>

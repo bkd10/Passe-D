@@ -8,7 +8,7 @@
   --fg-3: #7a7d72;
   --line: #e0dfd7;
   --line-strong: #c9c7bd;
-  --link: #3c5a00;
+  --link: #8a5a00;
   color-scheme: light;
   background: var(--bg);
   color: var(--fg);
@@ -26,7 +26,7 @@
   --fg-3: #84877c;
   --line: #2a2e26;
   --line-strong: #3e4339;
-  --link: #d7ff3a;
+  --link: #f2b631;
   color-scheme: dark;
 }
 .adm-side {
@@ -47,9 +47,8 @@
   color: #fff;
 }
 .adm-side .logo-mark {
-  width: 24px;
-  height: 24px;
-  font-size: 12px;
+  width: 28px;
+  height: 28px;
 }
 .adm-side a.nav-item {
   display: flex;
@@ -67,8 +66,8 @@
   color: #fff;
 }
 .adm-side a.nav-item[aria-current="page"] {
-  background: #d7ff3a;
-  color: #1a2000;
+  background: #f2b631;
+  color: #1f1500;
 }
 .adm-side .count {
   font-family: var(--font-mono);
@@ -79,8 +78,8 @@
   padding: 1px 7px;
 }
 .adm-side a.nav-item[aria-current="page"] .count {
-  background: #1a2000;
-  color: #d7ff3a;
+  background: #1f1500;
+  color: #f2b631;
 }
 .adm-side .sep {
   font-family: var(--font-mono);
@@ -400,8 +399,8 @@
   background: var(--bg);
 }
 .cal .day.today .n {
-  background: #d7ff3a;
-  color: #1a2000;
+  background: #f2b631;
+  color: #1f1500;
   border-radius: 999px;
   padding: 0 6px;
 }
@@ -547,7 +546,7 @@
   pointer-events: none;
 }
 .ed-body .ProseMirror img.ProseMirror-selectednode {
-  outline: 3px solid #d7ff3a;
+  outline: 3px solid #f2b631;
 }
 .ed-side {
   display: grid;
@@ -736,7 +735,7 @@
 .media-item:hover,
 .media-item[aria-pressed="true"] {
   border-color: var(--fg);
-  box-shadow: 0 0 0 2px #d7ff3a;
+  box-shadow: 0 0 0 2px #f2b631;
 }
 .media-item .im {
   aspect-ratio: 4/3;
@@ -865,7 +864,7 @@
   place-items: center;
   padding: 20px;
   background:
-    radial-gradient(circle at 80% 10%, rgba(215, 255, 58, 0.18), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(242, 182, 49, 0.18), transparent 40%),
     #0c0e0b;
   color: #f2f2ec;
 }
@@ -1091,4 +1090,11 @@
   .qp-bar .btn.lg {
     width: 100%;
   }
+}
+
+/* Le P du monogramme reste blanc sur les fonds sombres du back-office */
+.adm-side,
+.adm-top,
+.auth-wrap {
+  --logo-p: #f3f3f0;
 }

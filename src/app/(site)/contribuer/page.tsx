@@ -3,7 +3,7 @@ import { ContributeForm } from "@/components/contribute-form";
 
 export const metadata: Metadata = {
   title: "Contribuer : clubs amateurs",
-  description: "Clubs amateurs : envoyez vos résultats, comptes rendus, portraits et histoires à la rédaction de Quotidien Sportif.",
+  description: "Clubs amateurs : envoyez vos résultats, comptes rendus, portraits et histoires à la rédaction de Passe D.",
 };
 
 export default function ContributePage() {

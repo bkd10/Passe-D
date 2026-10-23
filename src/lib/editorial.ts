@@ -92,7 +92,7 @@ export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slu
 /** Rubriques créées au premier démarrage. Modifiables ensuite dans le back-office. */
 export const DEFAULT_CATEGORIES = [
   { slug: "actualites", name: "Actualités", color: "#f2f2ee", description: "L'essentiel du jour, vérifié et mis en perspective." },
-  { slug: "talents", name: "Talents", color: "#d7ff3a", description: "Portraits, profils à suivre, parcours et observations de terrain." },
+  { slug: "talents", name: "Talents", color: "#f2b631", description: "Portraits, profils à suivre, parcours et observations de terrain." },
   { slug: "football-amateur", name: "Football amateur", color: "#5ce1a6", description: "Résultats, clubs, comptes rendus et héros locaux." },
   { slug: "mercato", name: "Mercato", color: "#ffb547", description: "Rumeurs, négociations et transferts, avec leur niveau de confirmation." },
   { slug: "innovations", name: "Innovations", color: "#6fb7ff", description: "Data, technologies, équipements, méthodes et évolutions tactiques." },

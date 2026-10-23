@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CloseIcon, MenuIcon, MoonIcon, SearchIcon, SunIcon } from "./icons";
+import { Logo } from "./logo";
 
 type NavCat = { slug: string; name: string; description: string; inNav: boolean };
 
@@ -39,9 +40,8 @@ export function Masthead({ cats, ticker }: { cats: NavCat[]; ticker: { slug: str
     <header className="masthead">
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <div className="wrap masthead-row">
-        <Link href="/" className="logo" aria-label="Quotidien Sportif, accueil">
-          <span className="logo-mark" aria-hidden>QS</span>
-          Quotidien<small>/</small>Sportif
+        <Link href="/" className="logo" aria-label="Passe D, accueil">
+          <Logo />
         </Link>
         <nav className="nav" aria-label="Rubriques">
           {main.map((c) => (
@@ -79,7 +79,7 @@ export function Masthead({ cats, ticker }: { cats: NavCat[]; ticker: { slug: str
       )}
       <div className="drawer" data-open={open} role="dialog" aria-modal="true" aria-label="Menu">
         <div className="drawer-head">
-          <span className="logo"><span className="logo-mark" aria-hidden>QS</span>Menu</span>
+          <span className="logo"><Logo suffix="Menu" /></span>
           <button className="icon-btn" onClick={() => setOpen(false)} aria-label="Fermer le menu">
             <CloseIcon />
           </button>

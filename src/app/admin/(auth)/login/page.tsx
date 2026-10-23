@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogoMark } from "@/components/logo";
 import { redirect } from "next/navigation";
 import { sql } from "drizzle-orm";
 import { LoginForm } from "@/components/auth-forms";
@@ -16,9 +17,9 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   const { next } = await searchParams;
   return (
     <div className="auth-card">
-      <span className="logo"><span className="logo-mark">QS</span>Rédaction</span>
+      <span className="logo"><LogoMark />Rédaction</span>
       <h1>Connexion</h1>
-      <p style={{ color: "#b9bcb2", margin: 0 }}>Espace réservé à l&apos;équipe de Quotidien Sportif.</p>
+      <p style={{ color: "#b9bcb2", margin: 0 }}>Espace réservé à l&apos;équipe de Passe D.</p>
       <LoginForm next={next} />
       <p style={{ fontSize: 13, color: "#80847a", marginTop: 18 }}>
         Mot de passe oublié ? Demandez un nouveau lien d&apos;accès à l&apos;administrateur. <Link href="/" style={{ textDecoration: "underline" }}>Retour au site</Link>

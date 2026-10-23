@@ -59,8 +59,8 @@ export default async function Home() {
       <div className="wrap">
         <section className="page-head">
           <span className="kicker">Bienvenue</span>
-          <h1>Quotidien Sportif</h1>
-          <p>Le football que tu ne regardes pas encore. Les premiers articles arrivent très bientôt.</p>
+          <h1>Passe D</h1>
+          <p>Le football autrement. Les premiers articles arrivent très bientôt.</p>
         </section>
         <section className="section">
           <div className="rubrics">

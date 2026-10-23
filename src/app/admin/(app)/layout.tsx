@@ -6,7 +6,7 @@ import { can, isEditor, ROLE_LABELS } from "@/lib/permissions";
 import { AdminShell } from "@/components/admin/shell";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: { default: "Rédaction", template: "%s · Rédaction QS" }, robots: { index: false, follow: false } };
+export const metadata = { title: { default: "Rédaction", template: "%s · Rédaction Passe D" }, robots: { index: false, follow: false } };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();

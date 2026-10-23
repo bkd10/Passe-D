@@ -156,7 +156,7 @@ export function Dropzone({ onUploaded, accept = "image/*,video/mp4,video/webm,vi
     >
       <p style={{ margin: "0 0 10px", fontWeight: 650 }}>{busy || "Glissez des photos ou vidéos ici"}</p>
       <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
-        <input className="input" style={{ maxWidth: 240 }} placeholder="Crédit photo (ex. : Karim D. / QS)" value={credit} onChange={(e) => setCredit(e.target.value)} aria-label="Crédit appliqué aux fichiers importés" />
+        <input className="input" style={{ maxWidth: 240 }} placeholder="Crédit photo (ex. : Karim D. / Passe D)" value={credit} onChange={(e) => setCredit(e.target.value)} aria-label="Crédit appliqué aux fichiers importés" />
         <button type="button" className="btn dark" onClick={() => input.current?.click()} disabled={Boolean(busy)}>
           Choisir des fichiers
         </button>

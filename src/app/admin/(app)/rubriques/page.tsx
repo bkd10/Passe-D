@@ -29,7 +29,7 @@ export default async function TaxonomyPage() {
   const CatForm = ({ c }: { c?: typeof schema.categories.$inferSelect }) => (
     <form action={saveCategoryAction} style={{ display: "grid", gridTemplateColumns: "56px 1.2fr 1fr 2fr 1fr 70px auto auto", gap: 8, alignItems: "center" }}>
       {c && <input type="hidden" name="id" value={c.id} />}
-      <input type="color" name="color" defaultValue={c?.color ?? "#d7ff3a"} aria-label="Couleur" style={{ width: 48, height: 36, border: 0, background: "none" }} />
+      <input type="color" name="color" defaultValue={c?.color ?? "#f2b631"} aria-label="Couleur" style={{ width: 48, height: 36, border: 0, background: "none" }} />
       <input className="input" name="name" defaultValue={c?.name} placeholder="Nom" required aria-label="Nom" />
       <input className="input" name="slug" defaultValue={c?.slug} placeholder="adresse" aria-label="Adresse" />
       <input className="input" name="description" defaultValue={c?.description} placeholder="Description (SEO et page rubrique)" aria-label="Description" />

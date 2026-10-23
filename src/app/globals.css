@@ -4,7 +4,7 @@
 @import "@fontsource-variable/jetbrains-mono/index.css";
 
 /* ==========================================================================
-   Quotidien Sportif — système de design
+   Passe D — système de design
    Encre (fond sombre), Papier (fond clair), Chaux (couleur signature).
    ========================================================================== */
 
@@ -13,8 +13,8 @@
   --font-text: "Newsreader Variable", Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
 
-  --lime: #d7ff3a;
-  --lime-ink: #1a2000;
+  --lime: #f2b631;
+  --lime-ink: #1f1500;
   --red: #ff4b3e;
   --amber: #ffb547;
   --green: #3ddc97;
@@ -55,8 +55,9 @@
   --line-strong: #b8b6ac;
   --accent: #11130f;
   --accent-fg: var(--lime);
-  --link: #3c5a00;
-  --lime-text: #4a6600;
+  --link: #8a5a00;
+  --lime-text: #8a5a00;
+  --logo-p: var(--fg);
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.03), 0 18px 40px -28px rgba(0, 0, 0, 0.35);
   color-scheme: light;
 }
@@ -73,8 +74,9 @@
     --line-strong: #b8b6ac;
     --accent: #11130f;
     --accent-fg: var(--lime);
-    --link: #3c5a00;
-    --lime-text: #4a6600;
+    --link: #8a5a00;
+    --lime-text: #8a5a00;
+    --logo-p: var(--fg);
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.03), 0 18px 40px -28px rgba(0, 0, 0, 0.35);
     color-scheme: light;
   }
@@ -244,7 +246,7 @@ textarea {
 }
 .logo {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 2px;
   font-family: var(--font-display);
   font-stretch: 62%;
@@ -256,16 +258,14 @@ textarea {
   white-space: nowrap;
 }
 .logo-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  background: var(--lime);
-  color: var(--lime-ink);
-  border-radius: 50%;
-  font-size: 17px;
+  flex: none;
+  width: 44px;
+  height: 33px;
   margin-right: 8px;
-  transform: translateY(3px);
+}
+.logo-d {
+  color: var(--lime-text);
+  margin-left: 0.18em;
 }
 .logo small {
   font-weight: 500;
@@ -532,7 +532,7 @@ textarea {
 .badge.grey { background: #2f332c; color: #e6e6e0; border-color: #2f332c; }
 .badge.blue { background: #10304f; color: #bfe0ff; border-color: #1d4c78; }
 .badge.amber { background: #4a3300; color: #ffd890; border-color: #7a5600; }
-.badge.lime-soft { background: #2c3a00; color: #e8ff9a; border-color: #4b6200; }
+.badge.lime-soft { background: #3a2a00; color: #ffe2a0; border-color: #6b4d00; }
 .badge.green { background: #0b3d27; color: #9ff2c8; border-color: #12613f; }
 .badge.red { background: #4a0f0b; color: #ffb3ad; border-color: #7a1a12; }
 
@@ -567,7 +567,7 @@ textarea {
   border-radius: var(--radius);
   overflow: hidden;
   background:
-    radial-gradient(circle at 85% 15%, rgba(215, 255, 58, 0.22), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(242, 182, 49, 0.22), transparent 45%),
     repeating-linear-gradient(135deg, transparent 0 22px, rgba(255, 255, 255, 0.03) 22px 23px),
     #141712;
   display: flex;
@@ -1766,9 +1766,8 @@ figcaption,
     font-size: 24px;
   }
   .logo-mark {
-    width: 26px;
-    height: 26px;
-    font-size: 14px;
+    width: 36px;
+    height: 27px;
   }
   .logo small {
     display: none;

@@ -7,7 +7,7 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <h4>Quotidien Sportif</h4>
+            <h4>Passe D</h4>
             <p className="dek" style={{ margin: 0, maxWidth: 360 }}>
               {SITE_TAGLINE} Talents, terrains amateurs, métiers de l&apos;ombre et idées qui changent le jeu.
             </p>
@@ -39,9 +39,9 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
             </ul>
           </div>
         </div>
-        <div className="big-sign" aria-hidden>Quotidien Sportif</div>
+        <div className="big-sign" aria-hidden>Passe D</div>
         <div className="legal meta">
-          <span>© {new Date().getFullYear()} Quotidien Sportif. Contenus sponsorisés toujours signalés.</span>
+          <span>© {new Date().getFullYear()} Passe D. Contenus sponsorisés toujours signalés.</span>
           <span>Mesure d&apos;audience sans cookie.</span>
         </div>
       </div>

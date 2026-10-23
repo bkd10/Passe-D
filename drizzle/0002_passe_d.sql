@@ -1,0 +1,3 @@
+UPDATE "articles" SET "title" = replace("title", 'Quotidien Sportif', 'Passe D'), "dek" = replace("dek", 'Quotidien Sportif', 'Passe D'), "body_html" = replace("body_html", 'Quotidien Sportif', 'Passe D'), "slug" = CASE WHEN "slug" = 'bienvenue-sur-quotidien-sportif' THEN 'bienvenue-sur-passe-d' ELSE "slug" END WHERE "slug" IN ('bienvenue-sur-quotidien-sportif', 'clubs-amateurs-envoyez-nous-vos-resultats', 'mercato-comment-lire-nos-statuts') AND "status" = 'approved' AND "published_at" IS NULL;
+--> statement-breakpoint
+UPDATE "categories" SET "color" = '#f2b631' WHERE lower("color") = '#d7ff3a';

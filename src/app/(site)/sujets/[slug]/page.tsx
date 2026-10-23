@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const t = await getTag(slug);
   if (!t) return { title: "Sujet introuvable" };
-  return { title: t.name, description: t.description || `Tout Quotidien Sportif sur ${t.name}.`, alternates: { canonical: `${SITE_URL}/sujets/${t.slug}` } };
+  return { title: t.name, description: t.description || `Tout Passe D sur ${t.name}.`, alternates: { canonical: `${SITE_URL}/sujets/${t.slug}` } };
 }
 
 export default async function TagPage({ params, searchParams }: Props) {

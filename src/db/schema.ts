@@ -102,7 +102,7 @@ export const categories = pgTable(
     slug: text("slug").notNull(),
     name: text("name").notNull(),
     description: text("description").notNull().default(""),
-    color: text("color").notNull().default("#d7ff3a"),
+    color: text("color").notNull().default("#f2b631"),
     parentId: integer("parent_id"),
     position: integer("position").notNull().default(0),
     inNav: boolean("in_nav").notNull().default(true),

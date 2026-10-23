@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const u = await getAuthor(slug);
   if (!u) return { title: "Auteur introuvable" };
-  return { title: u.name, description: u.bio || `Les articles de ${u.name} sur Quotidien Sportif.`, alternates: { canonical: `${SITE_URL}/auteurs/${u.slug}` } };
+  return { title: u.name, description: u.bio || `Les articles de ${u.name} sur Passe D.`, alternates: { canonical: `${SITE_URL}/auteurs/${u.slug}` } };
 }
 
 export default async function AuthorPage({ params, searchParams }: Props) {

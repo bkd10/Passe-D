@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: `${SITE_NAME} — ${SITE_TAGLINE}`, template: `%s · ${SITE_NAME}` },
   description:
-    "Talents émergents, football amateur, métiers de l'ombre, innovations et mercato vérifié : Quotidien Sportif raconte le football que les autres ne racontent pas.",
+    "Talents émergents, football amateur, métiers de l'ombre, innovations et mercato vérifié : Passe D raconte le football que les autres ne racontent pas.",
   applicationName: SITE_NAME,
   openGraph: { siteName: SITE_NAME, locale: "fr_FR", type: "website" },
   twitter: { card: "summary_large_image" },

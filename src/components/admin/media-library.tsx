@@ -105,7 +105,7 @@ function MediaDetail({ m, folders, onClose, onSaved, onDeleted }: { m: MediaItem
                 setFocal({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height });
               }}>
                 <img src={m.variants?.lg || m.url} alt={m.alt} style={{ width: "100%" }} />
-                <span style={{ position: "absolute", left: `${focal.x * 100}%`, top: `${focal.y * 100}%`, width: 22, height: 22, marginLeft: -11, marginTop: -11, borderRadius: "50%", border: "3px solid #d7ff3a", boxShadow: "0 0 0 2px #000" }} />
+                <span style={{ position: "absolute", left: `${focal.x * 100}%`, top: `${focal.y * 100}%`, width: 22, height: 22, marginLeft: -11, marginTop: -11, borderRadius: "50%", border: "3px solid #f2b631", boxShadow: "0 0 0 2px #000" }} />
               </div>
             ) : (
               <video src={m.url} controls style={{ width: "100%", borderRadius: 8 }} />
