@@ -168,6 +168,7 @@ export const articles = pgTable(
     deadline: ts("deadline"),
     scheduledAt: ts("scheduled_at"),
     publishedAt: ts("published_at"),
+    archiveAt: ts("archive_at"), // archivage automatique : l'article quitte l'accueil et les rubriques à cette date
     updatedContentAt: ts("updated_content_at"),
     featured: boolean("featured").notNull().default(false),
     module: text("module").notNull().default(""), // format éditorial récurrent (talent-a-suivre, ...)

@@ -15,7 +15,7 @@ export function videoEmbed(url: string): { kind: "iframe" | "video"; src: string
   if (vimeo) return { kind: "iframe", src: `https://player.vimeo.com/video/${vimeo[1]}?texttrack=fr` };
   const dm = url.match(/dailymotion\.com\/video\/([a-z0-9]+)/i);
   if (dm) return { kind: "iframe", src: `https://www.dailymotion.com/embed/video/${dm[1]}?autoplay=0` };
-  if (/^https?:\/\/.+\.(mp4|webm|mov)(\?.*)?$/i.test(url)) return { kind: "video", src: url };
+  if (/^(https?:\/\/|\/uploads\/).+\.(mp4|webm|mov)(\?.*)?$/i.test(url)) return { kind: "video", src: url };
   return null;
 }
 
@@ -114,7 +114,14 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
       <div className="wrap">
         <div className="article-layout">
           <div />
-          <div className="prose" dangerouslySetInnerHTML={{ __html: art.bodyHtml }} />
+          <div className="prose-col">
+            {art.status === "archived" && (
+              <p className="notice archive-note">
+                <strong>Archive</strong> Cet article a été publié le {formatDateTime(art.publishedAt!)} et n&apos;est plus mis à jour.
+              </p>
+            )}
+            <div className="prose" dangerouslySetInnerHTML={{ __html: art.bodyHtml }} />
+          </div>
           <aside className="article-aside">
             {mercato && (
               <div className="notice">

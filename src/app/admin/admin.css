@@ -957,3 +957,138 @@
     display: none;
   }
 }
+
+/* Publication rapide : une seule page, quatre étapes, la barre d'envoi en bas */
+.qp {
+  display: grid;
+  gap: 14px;
+  max-width: 880px;
+}
+.qp-step h2 {
+  justify-content: flex-start;
+  font-size: 17px;
+}
+.qp-n {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--fg);
+  color: var(--bg-2);
+  font-size: 13px;
+  font-family: var(--font-mono);
+}
+.qp-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.qp-media,
+.qp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.qp-under,
+.qp-video {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.qp-video {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+.qp-under .hint {
+  margin: 0;
+}
+.qp-editor {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.qp-editor .ed-toolbar {
+  position: static;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 8px 8px 0 0;
+}
+.qp-editor .ed-body {
+  padding: 4px 16px 16px;
+  min-height: 260px;
+}
+.qp-editor .ed-body .ProseMirror {
+  min-height: 240px;
+}
+.qp-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: max(18px, env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -6px 20px rgb(0 0 0 / 0.06);
+  z-index: 5;
+}
+.qp-bar .btn.lg {
+  padding: 12px 22px;
+  font-size: 15.5px;
+}
+.qp-schedule {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.qp-schedule .input {
+  width: auto;
+}
+.linkish {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--link);
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+}
+.qp-done {
+  max-width: 720px;
+  padding: 28px;
+}
+.qp-done h2 {
+  font-size: 26px;
+  font-stretch: 80%;
+  line-height: 1.05;
+  display: block;
+}
+.qp-done-kicker {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--link);
+  font-weight: 700;
+}
+.qp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+@media (max-width: 720px) {
+  .qp-bar {
+    position: static;
+    box-shadow: none;
+  }
+  .qp-bar .btn.lg {
+    width: 100%;
+  }
+}

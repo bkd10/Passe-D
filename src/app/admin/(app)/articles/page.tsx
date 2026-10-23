@@ -109,7 +109,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
             <Link href={qs({ vue: "kanban", mois: undefined })} aria-current={view === "kanban" ? "page" : undefined}>Kanban</Link>
             <Link href={qs({ vue: "calendrier" })} aria-current={view === "calendrier" ? "page" : undefined}>Calendrier</Link>
           </nav>
-          <Link className="btn dark" href="/admin/articles/nouveau">+ Nouvel article</Link>
+          <Link className="btn dark" href="/admin/articles/publier">+ Publier un article</Link>
         </div>
       </div>
 
@@ -141,7 +141,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
         (items.length === 0 ? (
           <div className="panel" style={{ textAlign: "center", padding: 40 }}>
             <p style={{ margin: "0 0 12px", fontWeight: 650 }}>Aucun article ne correspond.</p>
-            <Link className="btn dark" href="/admin/articles/nouveau">Écrire un article</Link>
+            <Link className="btn dark" href="/admin/articles/publier">Écrire un article</Link>
           </div>
         ) : (
           <div className="tbl-wrap">

@@ -643,6 +643,9 @@ textarea {
 .hero-side .card .title {
   font-size: 22px;
 }
+.hero-side .card.row .title {
+  font-size: 17px;
+}
 
 .manifesto {
   display: grid;
@@ -1032,7 +1035,7 @@ select.chip {
 .video-rail {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
+  grid-auto-columns: minmax(200px, 240px);
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1447,8 +1450,15 @@ figcaption,
   gap: var(--gutter);
   padding: 32px 0 20px;
 }
-.article-layout > .prose {
+.article-layout > .prose-col {
   grid-column: 2;
+  min-width: 0;
+}
+.archive-note {
+  margin: 0 0 20px;
+}
+.archive-note strong {
+  margin-right: 8px;
 }
 .article-aside {
   grid-column: 3;
@@ -1732,7 +1742,7 @@ figcaption,
   .article-layout {
     grid-template-columns: minmax(0, 1fr);
   }
-  .article-layout > .prose,
+  .article-layout > .prose-col,
   .article-aside {
     grid-column: 1;
     max-width: var(--measure);

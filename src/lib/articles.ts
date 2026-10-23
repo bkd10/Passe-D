@@ -54,6 +54,7 @@ export const articleInput = z.object({
   priority: z.number().int().min(1).max(3).optional(),
   deadline: optionalDate,
   scheduledAt: optionalDate,
+  archiveAt: optionalDate,
   featured: z.boolean().optional(),
   module: z.string().max(60).optional(),
   sponsored: z.boolean().optional(),
@@ -179,6 +180,7 @@ export async function saveArticle(actor: Actor, id: number, raw: unknown) {
   copy("canonicalUrl", input.canonicalUrl);
   copy("ogImageId", input.ogImageId);
   copy("mercatoSource", input.mercatoSource);
+  copy("archiveAt", input.archiveAt);
   if (input.scheduledAt !== undefined) {
     if (!isEditor(actor)) throw new ArticleError("La programmation est réservée à la rédaction en chef.", 403);
     patch.scheduledAt = input.scheduledAt;

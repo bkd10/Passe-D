@@ -53,7 +53,7 @@ export async function setupAction(_: FormState, fd: FormData): Promise<FormState
     .insert(schema.users)
     .values({ name, email, slug: slugify(name), role: "admin", passwordHash: await hashPassword(password) })
     .returning();
-  await seedDefaults();
+  await seedDefaults(u.id);
   await createSession(u.id);
   await audit(u.id, "setup", "user", u.id);
   redirect("/admin?bienvenue=1");

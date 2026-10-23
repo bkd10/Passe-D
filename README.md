@@ -25,6 +25,9 @@ d'environnement de test (pointez-les vers un second projet Supabase si vous voul
 
 ## Ce qui fonctionne réellement
 
+- **Publier un article** (`/admin/articles/publier`) : une seule page avec rubrique en menu déroulant, titre, résumé, photo, vidéo (import ou lien YouTube/Vimeo/Dailymotion), texte, signature et archivage automatique (jamais, 7 j, 30 j, 3 mois, 1 an ou date précise). Publier maintenant, programmer, envoyer en relecture (journalistes) ou garder en brouillon. Le brouillon est gardé dans le navigateur tant qu'il n'est pas envoyé.
+- **Archivage** : un article archivé quitte l'accueil, les rubriques et le flux, mais son lien reste lisible avec la mention « Archive ». « Retirer du site » le rend introuvable.
+
 **Site public**
 - Accueil éditorialisé : une (article mis en avant + secondaires), manifeste, fil d'actualité filtrable
   (rubrique, format, période, popularité) avec rafraîchissement automatique sans rechargement, mercato décrypté

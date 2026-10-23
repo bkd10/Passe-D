@@ -16,10 +16,18 @@ export async function promoteScheduled(force = false) {
     .update(articles)
     .set({ status: "published", publishedAt: sql`${articles.scheduledAt}` })
     .where(and(eq(articles.status, "scheduled"), lte(articles.scheduledAt, new Date())));
+  await db
+    .update(articles)
+    .set({ status: "archived", archiveAt: null })
+    .where(and(inArray(articles.status, ["published", "update_needed"]), lte(articles.archiveAt, new Date())));
 }
 
 export const isPublic = () =>
   and(inArray(articles.status, ["published", "update_needed"]), lte(articles.publishedAt, new Date()))!;
+
+/** Les archives quittent l'accueil et les rubriques, mais leur lien reste lisible. */
+const isReadable = () =>
+  and(inArray(articles.status, ["published", "update_needed", "archived"]), lte(articles.publishedAt, new Date()))!;
 
 const cover = alias(media, "cover");
 
@@ -138,7 +146,7 @@ export async function getPublicArticle(slug: string) {
     .leftJoin(categories, eq(categories.id, articles.categoryId))
     .leftJoin(users, eq(users.id, articles.authorId))
     .leftJoin(cover, eq(cover.id, articles.coverId))
-    .where(and(eq(articles.slug, slug), isPublic()))
+    .where(and(eq(articles.slug, slug), isReadable()))
     .limit(1);
   if (!row) return null;
   return enrichArticle(row);

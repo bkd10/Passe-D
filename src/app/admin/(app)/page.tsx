@@ -89,7 +89,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
     <>
       {bienvenue && (
         <div className="alert ok">
-          Bienvenue ! Le site est prêt. Prochaine étape : <Link href="/admin/articles/nouveau" style={{ textDecoration: "underline" }}>écrire votre premier article</Link>, puis{" "}
+          Bienvenue ! Le site est prêt. Prochaine étape : <Link href="/admin/articles/publier" style={{ textDecoration: "underline" }}>écrire votre premier article</Link>, puis{" "}
           <Link href="/admin/equipe" style={{ textDecoration: "underline" }}>inviter vos journalistes</Link>.
         </div>
       )}
@@ -98,7 +98,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
           <h1>Bonjour {user.name.split(" ")[0]}</h1>
           <p>{new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", timeZone: "Europe/Paris" })}</p>
         </div>
-        <Link className="btn dark" href="/admin/articles/nouveau">+ Nouvel article</Link>
+        <Link className="btn dark" href="/admin/articles/publier">+ Publier un article</Link>
       </div>
       <div className="stats">
         <div className="stat"><div className="v">{counts.today}</div><div className="l">publiés aujourd&apos;hui</div></div>

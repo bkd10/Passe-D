@@ -191,8 +191,28 @@ r = await page.request.post(`${BASE}/api/admin/articles/${artId}/actions`, { hea
 assert.equal(r.status(), 200);
 r = await page.request.post(`${BASE}/api/admin/articles/${artId}/status`, { headers: H, data: { to: "archived" } });
 assert.equal(r.status(), 200);
+let archived = await pp.request.get(`${BASE}/articles/${slug}`);
+assert.equal(archived.status(), 200);
+assert.ok((await archived.text()).includes("archive-note"));
+r = await page.request.post(`${BASE}/api/admin/articles/${artId}/status`, { headers: H, data: { to: "writing" } });
+assert.equal(r.status(), 200);
 assert.equal((await pp.request.get(`${BASE}/articles/${slug}`)).status(), 404);
-log("duplication + archivage (article retiré du site)");
+log("duplication + archivage (lien lisible) + retrait du site (404)");
+
+// 9 bis. Publication rapide en un envoi, archivage automatique, refus pour un journaliste
+const qpPage = await page.request.get(`${BASE}/admin/articles/publier`);
+assert.equal(qpPage.status(), 200);
+const catId = Number((await qpPage.text()).match(/<option value="(\d+)">/)[1]);
+r = await page.request.post(`${BASE}/api/admin/articles/quick`, { headers: H, data: { action: "publish", categoryId: catId, title: "Publication rapide de test", bodyHtml: "<p>Un texte de test suffisamment long pour être publié.</p>", archiveAt: new Date(Date.now() - 60_000).toISOString() } });
+assert.equal(r.status(), 200);
+const quick = await r.json();
+assert.equal(quick.status, "archived");
+assert.equal((await pp.request.get(`${BASE}/articles/${quick.slug}`)).status(), 200);
+r = await p2.request.post(`${BASE}/api/admin/articles/quick`, { headers: H, data: { action: "publish", categoryId: catId, title: "Tentative", bodyHtml: "<p>Un texte de test suffisamment long pour être publié.</p>" } });
+assert.equal(r.status(), 403);
+r = await p2.request.post(`${BASE}/api/admin/articles/quick`, { headers: H, data: { action: "review", categoryId: null, title: "", bodyHtml: "" } });
+assert.equal(r.status(), 422);
+log("publication rapide, archivage automatique, droits respectés");
 
 // 10. Kanban, calendrier, tableau de bord, audience, réglages se chargent
 for (const p of ["/admin", "/admin/articles?vue=kanban", "/admin/articles?vue=calendrier", "/admin/audience", "/admin/reglages", "/admin/contributions", "/admin/rubriques", "/admin/profil", `/admin/apercu/${artId}`]) {

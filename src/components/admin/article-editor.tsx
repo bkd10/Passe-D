@@ -36,6 +36,7 @@ type Initial = {
   priority: number;
   deadline: string | null;
   scheduledAt: string | null;
+  archiveAt: string | null;
   publishedAt: string | null;
   featured: boolean;
   module: string;
@@ -75,7 +76,7 @@ type SaveState = { kind: "idle" | "dirty" | "saving" | "saved" | "error"; msg?: 
 const EDITABLE = [
   "title", "slug", "dek", "bodyHtml", "body", "format", "categoryId", "authorId", "assigneeId", "contributorIds", "coverId", "gallery",
   "videoUrl", "priority", "deadline", "featured", "module", "sponsored", "sponsorName", "seoTitle", "seoDescription", "canonicalUrl",
-  "ogImageId", "mercatoStatus", "mercatoSource", "tagNames", "relatedIds",
+  "ogImageId", "mercatoStatus", "mercatoSource", "tagNames", "relatedIds", "archiveAt",
 ] as const;
 type Field = (typeof EDITABLE)[number];
 
@@ -416,6 +417,13 @@ export function ArticleEditor({
             {status === "scheduled" && f.scheduledAt && (
               <p className="hint" style={{ marginTop: 0 }}><b>Programmé pour le {new Date(f.scheduledAt).toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}</b></p>
             )}
+            {perms.edit && status !== "archived" && (
+              <>
+                <label htmlFor="arch">Archivage automatique (facultatif)</label>
+                <input id="arch" type="datetime-local" className="input" value={toParisLocal(f.archiveAt)} onChange={(e) => set("archiveAt", parseParisLocal(e.target.value)?.toISOString() ?? null)} />
+                <p className="hint">À cette date, l&apos;article quitte l&apos;accueil et sa rubrique. Son lien reste lisible.</p>
+              </>
+            )}
             <div style={{ display: "grid", gap: 6 }}>
               {perms.editor ? (
                 <>
@@ -429,7 +437,8 @@ export function ArticleEditor({
                   )}
                   {isLive && status !== "update_needed" && <button className="btn ghost" onClick={() => changeStatus("update_needed")}>Marquer « à actualiser »</button>}
                   {status === "update_needed" && <button className="btn ghost" onClick={() => changeStatus("published")}>Actualisation terminée</button>}
-                  {(isLive || status === "scheduled") && <button className="btn danger" onClick={() => setModal({ to: "archived", title: "Dépublier et archiver" })}>Dépublier (archiver)</button>}
+                  {(isLive || status === "scheduled") && <button className="btn ghost" onClick={() => setModal({ to: "archived", title: "Archiver l'article" })}>Archiver maintenant</button>}
+                  {isLive && <button className="btn danger" onClick={() => setModal({ to: "writing", title: "Retirer du site" })}>Retirer du site</button>}
                   <label htmlFor="st">Changer le statut</label>
                   <select id="st" className="input" value={status} onChange={(e) => {
                     const to = e.target.value as Status;
@@ -770,7 +779,8 @@ function StatusModal({
         ) : (
           <>
             {modal.to === "published" && <p>L&apos;article sera visible immédiatement sur le site, dans le fil et le sitemap.</p>}
-            {modal.to === "archived" && <p>L&apos;article disparaît du site. Il reste dans le back-office et peut être republié.</p>}
+            {modal.to === "archived" && <p>L&apos;article quitte l&apos;accueil et sa rubrique. Son lien reste lisible avec la mention « Archive ». Il peut être republié à tout moment.</p>}
+            {modal.to === "writing" && <p>L&apos;article n&apos;est plus visible du tout sur le site (son lien affichera « page introuvable »). Il repasse en rédaction et peut être republié.</p>}
             {modal.to === "scheduled" && (
               <>
                 <label className="lbl" htmlFor="when">Date et heure de publication (heure de Paris)</label>
@@ -790,7 +800,7 @@ function StatusModal({
           <button className="btn ghost" onClick={onCancel}>Annuler</button>
           {!blocking && (
             <button
-              className={modal.to === "archived" ? "btn danger" : "btn dark"}
+              className={modal.to === "writing" ? "btn danger" : "btn dark"}
               disabled={busy || (modal.to === "changes" && !note.trim())}
               onClick={async () => {
                 setBusy(true);
@@ -810,7 +820,7 @@ function StatusModal({
   );
 }
 
-function Toolbar({ editor, onImage }: { editor: Editor; onImage: () => void }) {
+export function Toolbar({ editor, onImage }: { editor: Editor; onImage: () => void }) {
   const s = useEditorState({
     editor,
     selector: ({ editor: e }) => ({

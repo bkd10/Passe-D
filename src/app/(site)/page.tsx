@@ -36,7 +36,7 @@ export default async function Home() {
       listPublic({ featured: true, limit: 1 }),
       listPublic({ limit: 12 }),
       navCategories(),
-      listPublic({ module: "talent-a-suivre", limit: 1 }),
+      listPublic({ module: "talent-a-suivre", limit: 2 }),
       listPublic({ categorySlug: "mercato", limit: 6 }),
       listPublic({ module: "chiffre-du-jour", limit: 1 }),
       listPublic({ format: "video", limit: 8 }),
@@ -80,7 +80,7 @@ export default async function Home() {
   }
 
   const leadImg = pickImage(lead, "lg");
-  const talentPick = talent[0];
+  const talentPick = talent.find((t) => t.id !== lead.id);
   const figurePick = figure[0];
   const invisiblePick = invisible[0];
 
@@ -103,8 +103,8 @@ export default async function Home() {
           </div>
         </article>
         {secondary.length > 0 && <div className="hero-side">
-          {secondary.map((a) => (
-            <ArticleCard key={a.id} c={a} sizes="(max-width: 720px) 112px, 30vw" />
+          {secondary.map((a, i) => (
+            <ArticleCard key={a.id} c={a} variant={i === 0 ? "default" : "row"} sizes="(max-width: 720px) 112px, 30vw" />
           ))}
         </div>}
       </section>

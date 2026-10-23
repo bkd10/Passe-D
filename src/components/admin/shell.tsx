@@ -34,11 +34,11 @@ export function AdminShell({
           <MenuIcon />
         </button>
         <span className="logo"><span className="logo-mark">QS</span>Rédaction</span>
-        {canCreate ? <Link className="btn sm" href="/admin/articles/nouveau">+ Article</Link> : <span />}
+        {canCreate ? <Link className="btn sm" href="/admin/articles/publier">+ Article</Link> : <span />}
       </div>
       <aside className="adm-side" data-open={open} onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
         <Link href="/admin" className="logo"><span className="logo-mark">QS</span>Rédaction</Link>
-        {canCreate && <Link className="btn new-btn" href="/admin/articles/nouveau">+ Nouvel article</Link>}
+        {canCreate && <Link className="btn new-btn" href="/admin/articles/publier">+ Publier un article</Link>}
         {nav.map((n, i) =>
           "sep" in n ? (
             <div key={i} className="sep">{n.sep}</div>
