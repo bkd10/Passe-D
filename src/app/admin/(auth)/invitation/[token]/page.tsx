@@ -21,13 +21,13 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
       {u ? (
         <>
           <h1>Bienvenue {u.name.split(" ")[0]}</h1>
-          <p style={{ color: "#b9bcb2", margin: 0 }}>Vous rejoignez la rédaction en tant que {ROLE_LABELS[u.role].toLowerCase()}. Choisissez votre mot de passe.</p>
+          <p style={{ color: "#bdbdbd", margin: 0 }}>Vous rejoignez la rédaction en tant que {ROLE_LABELS[u.role].toLowerCase()}. Choisissez votre mot de passe.</p>
           <InviteForm token={token} />
         </>
       ) : (
         <>
           <h1>Lien expiré</h1>
-          <p style={{ color: "#b9bcb2" }}>Ce lien d&apos;invitation n&apos;est plus valable. Demandez-en un nouveau à l&apos;administrateur.</p>
+          <p style={{ color: "#bdbdbd" }}>Ce lien d&apos;invitation n&apos;est plus valable. Demandez-en un nouveau à l&apos;administrateur.</p>
         </>
       )}
     </div>

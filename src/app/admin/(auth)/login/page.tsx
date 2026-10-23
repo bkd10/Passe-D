@@ -19,9 +19,9 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <div className="auth-card">
       <span className="logo"><LogoMark />Rédaction</span>
       <h1>Connexion</h1>
-      <p style={{ color: "#b9bcb2", margin: 0 }}>Espace réservé à l&apos;équipe de Passe D.</p>
+      <p style={{ color: "#bdbdbd", margin: 0 }}>Espace réservé à l&apos;équipe de Passe D.</p>
       <LoginForm next={next} />
-      <p style={{ fontSize: 13, color: "#80847a", marginTop: 18 }}>
+      <p style={{ fontSize: 13, color: "#858585", marginTop: 18 }}>
         Mot de passe oublié ? Demandez un nouveau lien d&apos;accès à l&apos;administrateur. <Link href="/" style={{ textDecoration: "underline" }}>Retour au site</Link>
       </p>
     </div>

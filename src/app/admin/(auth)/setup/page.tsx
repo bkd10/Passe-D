@@ -15,7 +15,7 @@ export default async function SetupPage() {
     <div className="auth-card">
       <span className="logo"><LogoMark />Installation</span>
       <h1>Premier compte</h1>
-      <p style={{ color: "#b9bcb2", margin: 0 }}>Créez le compte administrateur. Les rubriques de base seront créées automatiquement.</p>
+      <p style={{ color: "#bdbdbd", margin: 0 }}>Créez le compte administrateur. Les rubriques de base seront créées automatiquement.</p>
       <SetupForm needToken={Boolean(process.env.ADMIN_SETUP_TOKEN) || process.env.NODE_ENV === "production"} />
     </div>
   );

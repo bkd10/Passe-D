@@ -3,9 +3,9 @@
   --bg: #f6f6f2;
   --bg-2: #ffffff;
   --bg-3: #ecebe5;
-  --fg: #12140f;
-  --fg-2: #4a4d44;
-  --fg-3: #7a7d72;
+  --fg: #121212;
+  --fg-2: #4a4a4a;
+  --fg-3: #7a7a7a;
   --line: #e0dfd7;
   --line-strong: #c9c7bd;
   --link: #8a5a00;
@@ -18,14 +18,14 @@
   font-size: 14.5px;
 }
 :root[data-theme="dark"] .adm {
-  --bg: #0f110d;
-  --bg-2: #171a14;
-  --bg-3: #20241c;
-  --fg: #f0f0ea;
-  --fg-2: #b6b9ae;
-  --fg-3: #84877c;
-  --line: #2a2e26;
-  --line-strong: #3e4339;
+  --bg: #0b0b0b;
+  --bg-2: #161616;
+  --bg-3: #212121;
+  --fg: #f3f3f1;
+  --fg-2: #b8b8b8;
+  --fg-3: #868686;
+  --line: #2a2a2a;
+  --line-strong: #3f3f3f;
   --link: #f2b631;
   color-scheme: dark;
 }
@@ -34,8 +34,8 @@
   top: 0;
   height: 100vh;
   overflow-y: auto;
-  background: #10120e;
-  color: #e9eae3;
+  background: #0f0f0f;
+  color: #ececea;
   padding: 18px 14px;
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@
   gap: 10px;
   padding: 9px 10px;
   border-radius: 6px;
-  color: #c3c6bb;
+  color: #c6c6c6;
   font-weight: 600;
   font-stretch: 92%;
 }
@@ -72,8 +72,8 @@
 .adm-side .count {
   font-family: var(--font-mono);
   font-size: 11px;
-  background: #2b3025;
-  color: #e9eae3;
+  background: #2a2a2a;
+  color: #ececea;
   border-radius: 999px;
   padding: 1px 7px;
 }
@@ -92,7 +92,7 @@
 .adm-side .me {
   margin-top: auto;
   padding: 12px 10px 0;
-  border-top: 1px solid #2b3025;
+  border-top: 1px solid #2a2a2a;
   font-size: 13px;
   color: #a9ac9f;
 }
@@ -282,7 +282,7 @@
 .st-changes { color: #b91c1c; background: #fee2e2; }
 .st-approved { color: #047857; background: #d1fae5; }
 .st-scheduled { color: #0e7490; background: #cffafe; }
-.st-published { color: #3f6212; background: #ecfccb; }
+.st-published { color: #166534; background: #dcfce7; }
 .st-update_needed { color: #c2410c; background: #ffedd5; }
 .st-archived { color: #57534e; background: #e7e5e4; }
 :root[data-theme="dark"] .adm .st { background: var(--bg-3); }
@@ -421,7 +421,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.cal .ev.published { background: #ecfccb; color: #365314; }
+.cal .ev.published { background: #dcfce7; color: #14532d; }
 .cal .ev.scheduled { background: #cffafe; color: #155e75; }
 .cal .ev.deadline { background: #fef3c7; color: #92400e; }
 :root[data-theme="dark"] .cal .ev { background: var(--bg-3) !important; color: var(--fg) !important; }
@@ -828,7 +828,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 200;
-  background: #12140f;
+  background: #121212;
   color: #fff;
   padding: 12px 18px;
   border-radius: 8px;
@@ -865,13 +865,13 @@
   padding: 20px;
   background:
     radial-gradient(circle at 80% 10%, rgba(242, 182, 49, 0.18), transparent 40%),
-    #0c0e0b;
-  color: #f2f2ec;
+    #0a0a0a;
+  color: #f5f5f3;
 }
 .auth-card {
   width: min(420px, 100%);
-  background: #141712;
-  border: 1px solid #2a2e26;
+  background: #141414;
+  border: 1px solid #2a2a2a;
   border-radius: 14px;
   padding: 28px;
 }
@@ -885,8 +885,8 @@
 }
 .auth-card .input {
   width: 100%;
-  background: #0c0e0b;
-  border-color: #3e4339;
+  background: #0a0a0a;
+  border-color: #3f3f3f;
 }
 .auth-card .btn {
   width: 100%;
@@ -897,7 +897,7 @@
   font-size: 13px;
   font-weight: 650;
   margin: 14px 0 6px;
-  color: #b9bcb2;
+  color: #bdbdbd;
 }
 
 @media (max-width: 1100px) {
@@ -931,7 +931,7 @@
     justify-content: space-between;
     gap: 10px;
     padding: 10px 16px;
-    background: #10120e;
+    background: #0f0f0f;
     color: #fff;
     position: sticky;
     top: 0;

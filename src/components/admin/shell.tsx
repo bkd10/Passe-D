@@ -56,7 +56,7 @@ export function AdminShell({
           <strong>{me.name}</strong>
           {me.role}
           <form action={logoutAction} style={{ marginTop: 8 }}>
-            <button className="btn ghost sm" style={{ background: "transparent", color: "#c3c6bb", borderColor: "#3a3f34" }}>Se déconnecter</button>
+            <button className="btn ghost sm" style={{ background: "transparent", color: "#c6c6c6", borderColor: "#3a3a3a" }}>Se déconnecter</button>
           </form>
         </div>
       </aside>

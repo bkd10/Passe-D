@@ -91,12 +91,12 @@ export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slu
 
 /** Rubriques créées au premier démarrage. Modifiables ensuite dans le back-office. */
 export const DEFAULT_CATEGORIES = [
-  { slug: "actualites", name: "Actualités", color: "#f2f2ee", description: "L'essentiel du jour, vérifié et mis en perspective." },
+  { slug: "actualites", name: "Actualités", color: "#f5f5f3", description: "L'essentiel du jour, vérifié et mis en perspective." },
   { slug: "talents", name: "Talents", color: "#f2b631", description: "Portraits, profils à suivre, parcours et observations de terrain." },
-  { slug: "football-amateur", name: "Football amateur", color: "#5ce1a6", description: "Résultats, clubs, comptes rendus et héros locaux." },
-  { slug: "mercato", name: "Mercato", color: "#ffb547", description: "Rumeurs, négociations et transferts, avec leur niveau de confirmation." },
-  { slug: "innovations", name: "Innovations", color: "#6fb7ff", description: "Data, technologies, équipements, méthodes et évolutions tactiques." },
-  { slug: "metiers-du-football", name: "Métiers du football", color: "#ff7a59", description: "Scouts, analystes, intendants, arbitres, groundsmen : ceux qu'on ne voit pas." },
-  { slug: "videos", name: "Vidéos", color: "#ff4f8b", description: "Interviews, reportages, analyses, formats courts et coulisses." },
-  { slug: "culture-football", name: "Culture football", color: "#b79cff", description: "Histoires, supporters, archives, économie et phénomènes de société." },
+  { slug: "football-amateur", name: "Football amateur", color: "#e9c46a", description: "Résultats, clubs, comptes rendus et héros locaux." },
+  { slug: "mercato", name: "Mercato", color: "#ff9f43", description: "Rumeurs, négociations et transferts, avec leur niveau de confirmation." },
+  { slug: "innovations", name: "Innovations", color: "#d9b26f", description: "Data, technologies, équipements, méthodes et évolutions tactiques." },
+  { slug: "metiers-du-football", name: "Métiers du football", color: "#f4d58d", description: "Scouts, analystes, intendants, arbitres, groundsmen : ceux qu'on ne voit pas." },
+  { slug: "videos", name: "Vidéos", color: "#ffcf5c", description: "Interviews, reportages, analyses, formats courts et coulisses." },
+  { slug: "culture-football", name: "Culture football", color: "#c8a97e", description: "Histoires, supporters, archives, économie et phénomènes de société." },
 ];

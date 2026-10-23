@@ -4,7 +4,8 @@ import { LiveFeed } from "@/components/live-feed";
 import { Poll } from "@/components/poll";
 import { Newsletter } from "@/components/newsletter";
 import { activePoll, getSetting, listPublic, navCategories, type Card } from "@/lib/queries";
-import { MERCATO_LABELS, moduleBySlug } from "@/lib/editorial";
+import { DEFAULT_CATEGORIES, MERCATO_LABELS, moduleBySlug } from "@/lib/editorial";
+import { LogoMark } from "@/components/logo";
 import { timeAgo } from "@/lib/util";
 import { PlayIcon } from "@/components/icons";
 import type { MercatoStatus } from "@/db/schema";
@@ -55,27 +56,41 @@ export default async function Home() {
   const catColor = (slug: string) => topCats.find((c) => c.slug === slug)?.color;
 
   if (!lead) {
+    const tiles = topCats.length ? topCats : DEFAULT_CATEGORIES;
     return (
-      <div className="wrap">
-        <section className="page-head">
-          <span className="kicker">Bienvenue</span>
-          <h1>Passe D</h1>
-          <p>Le football autrement. Les premiers articles arrivent très bientôt.</p>
-        </section>
-        <section className="section">
-          <div className="rubrics">
-            {topCats.map((c) => (
-              <Link key={c.slug} href={`/${c.slug}`} className="rubric-tile" style={{ ["--cat" as string]: c.color }}>
-                <h3>{c.name}</h3>
-                <p>{c.description}</p>
-              </Link>
-            ))}
+      <>
+        <section className="launch">
+          <div className="wrap launch-inner">
+            <LogoMark className="launch-mark" />
+            <h1>
+              Passe <span>D</span>
+            </h1>
+            <p className="launch-sub">Média</p>
+            <p className="launch-tagline">Le football autrement.</p>
+            <p className="launch-text">Talents, terrains amateurs, mercato vérifié et métiers de l&apos;ombre. Les premiers articles arrivent très bientôt.</p>
+            <div className="launch-actions">
+              <a className="btn" href="#newsletter">Être prévenu du lancement</a>
+              <Link className="btn ghost" href="/contribuer">Proposer une info (clubs)</Link>
+            </div>
           </div>
         </section>
-        <section className="section" id="newsletter">
-          <Newsletter cats={topCats.map((c) => ({ slug: c.slug, name: c.name }))} />
-        </section>
-      </div>
+        <div className="wrap">
+          <section className="section">
+            <SectionHead num="01" title="Les rubriques" sub="Ce que vous lirez sur Passe D." />
+            <div className="rubrics">
+              {tiles.map((c) => (
+                <Link key={c.slug} href={`/${c.slug}`} className="rubric-tile" style={{ ["--cat" as string]: c.color }}>
+                  <h3>{c.name}</h3>
+                  <p>{c.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+          <section className="section" id="newsletter">
+            <Newsletter cats={tiles.map((c) => ({ slug: c.slug, name: c.name }))} />
+          </section>
+        </div>
+      </>
     );
   }
 
@@ -111,7 +126,7 @@ export default async function Home() {
 
       <section className="manifesto" aria-label="Notre promesse">
         <span className="display">
-          Le football que tu ne regardes <em>pas encore.</em>
+          Le football <em>autrement.</em>
         </span>
         <p>Des talents avant tout le monde, des terrains amateurs, les métiers de l&apos;ombre et les idées qui changent le jeu. Vérifié, sourcé, raconté autrement.</p>
         <Link className="btn ghost" href="/charte">Notre charte</Link>
