@@ -1,10 +1,11 @@
+import sharp from "sharp";
 import { getPublicArticle } from "@/lib/queries";
 import { SOCIAL_FORMATS, socialImage, type SocialFormat } from "@/lib/social-image";
 import { SITE_URL } from "@/lib/util";
 
 export const dynamic = "force-dynamic";
 
-/** Visuel réseaux sociaux d'un article publié : ?format=post (Instagram), story ou og (aperçu de lien). */
+/** Visuel réseaux sociaux d'un article publié : ?format=post (Instagram), story ou og (aperçu de lien). &type=jpg pour la publication automatique Instagram, qui n'accepte que le JPEG. */
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const url = new URL(req.url);
@@ -24,8 +25,13 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
     },
     format,
   );
+  const jpg = url.searchParams.get("type") === "jpg";
   const headers = new Headers(img.headers);
   headers.set("Cache-Control", "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400");
-  if (url.searchParams.has("download")) headers.set("Content-Disposition", `attachment; filename="passe-d-${slug}-${format}.png"`);
-  return new Response(img.body, { status: 200, headers });
+  if (url.searchParams.has("download")) headers.set("Content-Disposition", `attachment; filename="passe-d-${slug}-${format}.${jpg ? "jpg" : "png"}"`);
+  if (!jpg) return new Response(img.body, { status: 200, headers });
+  const out = await sharp(Buffer.from(await img.arrayBuffer())).jpeg({ quality: 90 }).toBuffer();
+  headers.set("Content-Type", "image/jpeg");
+  headers.delete("Content-Length");
+  return new Response(new Uint8Array(out), { status: 200, headers });
 }

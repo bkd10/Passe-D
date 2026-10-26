@@ -169,7 +169,12 @@ for (const format of ["post", "story", "og"]) {
 assert.equal((await pp.request.get(`${BASE}/articles/article-inexistant/visuel`)).status(), 404);
 assert.ok((await (await pp.request.get(`${BASE}/articles/${slug}`)).text()).includes(`/articles/${slug}/visuel?format=og`));
 assert.ok((await (await pp.request.get(`${BASE}/rss.xml`)).text()).includes(`/articles/${slug}/visuel?format=post`));
-log("visuels réseaux sociaux (Instagram, story, aperçu de lien) + flux RSS illustré");
+const jpg = await pp.request.get(`${BASE}/articles/${slug}/visuel?format=post&type=jpg`);
+assert.equal(jpg.headers()["content-type"], "image/jpeg");
+assert.equal((await jpg.body()).subarray(0, 2).toString("hex"), "ffd8");
+const reseaux = await (await pp.request.get(`${BASE}/reseaux.xml`)).text();
+assert.ok(reseaux.includes(`/articles/${slug}/visuel?format=post&amp;type=jpg`) && reseaux.includes("lien en bio") && reseaux.includes("#PasseD"));
+log("visuels réseaux sociaux (Instagram, story, aperçu de lien, JPEG) + flux RSS illustré + flux réseaux");
 
 // 8. Programmation d'un second article
 const created = await page.request.post(`${BASE}/admin/articles/nouveau`).catch(() => null);
