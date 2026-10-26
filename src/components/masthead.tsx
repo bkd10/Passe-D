@@ -66,13 +66,20 @@ export function Masthead({ cats, ticker }: { cats: NavCat[]; ticker: { slug: str
         <div className="subnav">
           <div className="wrap ticker">
             <span className="ticker-label">En direct</span>
+            {/* Bandeau défilant : la liste est rendue deux fois pour boucler sans saut ; la copie est ignorée par les lecteurs d'écran. */}
             <div className="ticker-items">
-              {ticker.map((t) => (
-                <Link key={t.slug} href={`/articles/${t.slug}`}>
-                  <time>{t.time}</time>
-                  {t.title}
-                </Link>
-              ))}
+              <div className="ticker-track" style={{ ["--ticker-duration" as string]: `${Math.max(ticker.length * 7, 20)}s` }}>
+                {[0, 1].map((copy) => (
+                  <div className="ticker-group" key={copy} aria-hidden={copy === 1 || undefined}>
+                    {ticker.map((t) => (
+                      <Link key={t.slug} href={`/articles/${t.slug}`} tabIndex={copy === 1 ? -1 : undefined}>
+                        <time>{t.time}</time>
+                        {t.title}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

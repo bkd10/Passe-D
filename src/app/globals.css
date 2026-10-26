@@ -375,15 +375,34 @@ textarea {
   flex: none;
 }
 .ticker-items {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 88%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker var(--ticker-duration, 40s) linear infinite;
+}
+.ticker-items:hover .ticker-track,
+.ticker-items:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+.ticker-group {
   display: flex;
   gap: 28px;
-  white-space: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  mask-image: linear-gradient(90deg, #000 85%, transparent);
+  padding-right: 28px;
 }
-.ticker-items::-webkit-scrollbar {
-  display: none;
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-items { overflow-x: auto; scrollbar-width: none; }
+  .ticker-track { animation: none; }
+  .ticker-group[aria-hidden] { display: none; }
 }
 .ticker-items a {
   color: var(--fg-2);
