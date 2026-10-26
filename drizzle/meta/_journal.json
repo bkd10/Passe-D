@@ -57,6 +57,13 @@
       "when": 1792820000000,
       "tag": "0007_coupe_de_france",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1792830000000,
+      "tag": "0008_ballon_dor_kane",
+      "breakpoints": true
     }
   ]
 }

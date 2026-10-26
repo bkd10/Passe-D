@@ -68,7 +68,11 @@ const titleSize = (t: string, f: SocialFormat) => {
 };
 
 /** Visuel Passe D d'un article : photo, rubrique, titre et logo, aux formats Instagram, story et aperçu de lien. */
-export async function socialImage(a: Input, format: SocialFormat) {
+// Les émojis (⭐, ⚽…) sont retirés du visuel : nos polices n'en ont pas, et le moteur d'image irait les chercher sur un CDN.
+const noEmoji = (s: string) => s.replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}\u{1F1E6}-\u{1F1FF}]/gu, "").replace(/\s{2,}/g, " ").trim();
+
+export async function socialImage(input: Input, format: SocialFormat) {
+  const a = { ...input, title: noEmoji(input.title), dek: input.dek ? noEmoji(input.dek) : input.dek };
   const { width, height } = SOCIAL_FORMATS[format];
   const isOg = format === "og";
   const photoH = isOg ? height : format === "story" ? 1100 : 720;
