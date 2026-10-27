@@ -99,6 +99,13 @@
       "when": 1792880000000,
       "tag": "0013_racisme_andorre",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1792890000000,
+      "tag": "0014_racisme_andorre_titre",
+      "breakpoints": true
     }
   ]
 }
