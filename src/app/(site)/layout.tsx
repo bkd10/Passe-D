@@ -29,7 +29,8 @@ const siteJsonLd = [
 ];
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const [cats, latest] = await Promise.all([navCategories(), listPublic({ limit: 6 })]);
+  // Le fil « En direct » ne montre que les articles des dernières 24 h ; vide, il disparaît.
+  const [cats, latest] = await Promise.all([navCategories(), listPublic({ limit: 8, since: new Date(Date.now() - 24 * 3600_000) })]);
   const navCats = cats.filter((c) => !c.parentId);
   return (
     <>
