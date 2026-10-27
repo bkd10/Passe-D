@@ -152,6 +152,27 @@ export async function getPublicArticle(slug: string) {
   return enrichArticle(row);
 }
 
+/** Articles publiés qui ont une version anglaise publiée (titre et chapô traduits). */
+export async function listEnglish(limit = 60): Promise<Card[]> {
+  await promoteScheduled();
+  const db = await getDb();
+  return (await db
+    .select({ ...cardFields, title: articles.enTitle, dek: articles.enDek })
+    .from(articles)
+    .leftJoin(categories, eq(categories.id, articles.categoryId))
+    .leftJoin(users, eq(users.id, articles.authorId))
+    .leftJoin(cover, eq(cover.id, articles.coverId))
+    .where(and(isPublic(), eq(articles.enPublished, true), ne(articles.enTitle, "")))
+    .orderBy(desc(articles.publishedAt), desc(articles.id))
+    .limit(limit)) as Card[];
+}
+
+/** Article lisible dont la version anglaise est publiée. */
+export async function getEnglishArticle(slug: string) {
+  const a = await getPublicArticle(slug);
+  return a && a.article.enPublished && a.article.enTitle && a.article.enBodyHtml ? a : null;
+}
+
 /** Version d'aperçu : renvoie l'article quel que soit son statut (réservé au back-office). */
 export async function getArticleForPreview(id: number) {
   const db = await getDb();

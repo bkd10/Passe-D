@@ -27,7 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: art.canonicalUrl || `${SITE_URL}/articles/${art.slug}` },
+    alternates: {
+      canonical: art.canonicalUrl || `${SITE_URL}/articles/${art.slug}`,
+      languages: art.enPublished && art.enTitle
+        ? { fr: `${SITE_URL}/articles/${art.slug}`, en: `${SITE_URL}/en/articles/${art.slug}`, "x-default": `${SITE_URL}/articles/${art.slug}` }
+        : undefined,
+    },
     authors: a.author ? [{ name: a.author.name, url: `${SITE_URL}/auteurs/${a.author.slug}` }] : undefined,
     openGraph: {
       type: "article",

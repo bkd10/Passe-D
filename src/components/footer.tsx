@@ -30,6 +30,7 @@ export function Footer({ cats }: { cats: { slug: string; name: string }[] }) {
               <li><Link href="/#newsletter">Newsletter</Link></li>
               <li><Link href="/contribuer">Proposer une info (clubs)</Link></li>
               <li><Link href="/rss.xml">Flux RSS</Link></li>
+              <li><Link href="/en" hrefLang="en" lang="en">Passe D in English</Link></li>
             </ul>
           </div>
           <div>

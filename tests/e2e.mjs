@@ -181,6 +181,31 @@ const ldOrg = await (await pp.request.get(`${BASE}/articles/${slug}`)).text();
 assert.ok(ldOrg.includes('"NewsMediaOrganization"') && ldOrg.includes("/logo.png"));
 log("visuels réseaux sociaux (Instagram, story, aperçu de lien, JPEG) + flux RSS illustré + flux réseaux + Google (sitemap actualités, données structurées)");
 
+// 7 bis. Version anglaise : réservée à qui peut modifier l'article, publiée à part sur /en
+const enData = { title: "A 17-year-old keeper nobody knows yet", dek: "Three penalties saved in the Gambardella.", text: "## Reflexes\n\nIt is 3pm in Bondy & Yanis pulls on his gloves.\n\n- one\n- two\n\n[Read more](https://example.com)", published: true };
+r = await p2.request.put(`${BASE}/api/admin/articles/${artId}/english`, { headers: H, data: enData });
+assert.equal(r.status(), 403);
+r = await page.request.put(`${BASE}/api/admin/articles/${artId}/english`, { headers: H, data: { ...enData, text: "" } });
+assert.equal(r.status(), 400, "pas de publication sans texte");
+r = await page.request.put(`${BASE}/api/admin/articles/${artId}/english`, { headers: H, data: enData });
+assert.equal(r.status(), 200);
+const enPage = await pp.request.get(`${BASE}/en/articles/${slug}`);
+assert.equal(enPage.status(), 200);
+const enHtml = await enPage.text();
+assert.ok(enHtml.includes("A 17-year-old keeper nobody knows yet") && enHtml.includes('lang="en"') && enHtml.includes("Lire en français"));
+assert.ok(enHtml.includes("<h2>Reflexes</h2>") && enHtml.includes("Bondy &amp; Yanis") && enHtml.includes('rel="noopener noreferrer"'));
+const frHtml = await (await pp.request.get(`${BASE}/articles/${slug}`)).text();
+assert.ok(frHtml.includes("Read in English") && /hreflang="en" href="[^"]*\/en\/articles\//i.test(frHtml));
+const enHome = await (await pp.request.get(`${BASE}/en`)).text();
+assert.ok(enHome.includes("A 17-year-old keeper nobody knows yet") && enHome.includes("Harry Kane crowned the best player in the world"));
+assert.ok((await (await pp.request.get(`${BASE}/sitemap.xml`)).text()).includes(`/en/articles/${slug}`));
+await page.goto(`${BASE}/admin/articles/${artId}`);
+assert.equal(await page.inputValue("#en-title"), enData.title);
+assert.ok((await page.inputValue("#en-text")).includes("## Reflexes") && (await page.inputValue("#en-text")).includes("[Read more](https://example.com)"));
+r = await page.request.put(`${BASE}/api/admin/articles/${artId}/english`, { headers: H, data: { ...enData, published: false } });
+assert.equal((await pp.request.get(`${BASE}/en/articles/${slug}`)).status(), 404);
+log("version anglaise : droits serveur, page /en, liens entre langues, hreflang, sitemap, dépublication");
+
 // 8. Programmation d'un second article
 const created = await page.request.post(`${BASE}/admin/articles/nouveau`).catch(() => null);
 void created;

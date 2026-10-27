@@ -181,6 +181,11 @@ export const articles = pgTable(
     mercatoStatus: text("mercato_status").$type<MercatoStatus | "">().notNull().default(""),
     mercatoSource: text("mercato_source").notNull().default(""),
     readingMinutes: integer("reading_minutes").notNull().default(1),
+    // Version anglaise facultative, publiée à part sur /en/articles/[slug].
+    enTitle: text("en_title").notNull().default(""),
+    enDek: text("en_dek").notNull().default(""),
+    enBodyHtml: text("en_body_html").notNull().default(""),
+    enPublished: boolean("en_published").notNull().default(false),
     views: integer("views").notNull().default(0),
     version: integer("version").notNull().default(1),
     createdBy: integer("created_by").references(() => users.id, { onDelete: "set null" }),

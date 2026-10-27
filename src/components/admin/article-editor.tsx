@@ -14,6 +14,7 @@ import type { Status } from "@/db/schema";
 import { STATUS_LABELS } from "@/lib/permissions";
 import { slugify, toParisLocal, parseParisLocal } from "@/lib/util";
 import { SocialShare } from "@/components/admin/social-share";
+import { EnglishPanel } from "@/components/admin/english-panel";
 
 type Opt = { id: number; name: string };
 type Note = { id: number; body: string; kind: string; resolved: boolean; createdAt: string; author: string | null };
@@ -56,6 +57,7 @@ type Initial = {
   tagNames: string[];
   contributorIds: number[];
   related: { id: number; title: string; status: Status }[];
+  english: { title: string; dek: string; text: string; published: boolean };
   cover: MediaItem | null;
   ogImage: MediaItem | null;
   galleryItems: MediaItem[];
@@ -647,6 +649,8 @@ export function ArticleEditor({
               <div className="d">{(f.seoDescription || f.dek || "Ajoutez un chapô ou une description.").slice(0, 160)}</div>
             </div>
           </section>
+
+          <EnglishPanel articleId={initial.id} slug={f.slug} siteUrl={options.siteUrl} canEdit={perms.edit} isLive={isLive} initial={initial.english} />
 
           {/* Sponsorisé */}
           <section className="panel">

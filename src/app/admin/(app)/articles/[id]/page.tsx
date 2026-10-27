@@ -13,6 +13,7 @@ import {
   isEditor,
 } from "@/lib/permissions";
 import { ArticleEditor } from "@/components/admin/article-editor";
+import { htmlToText } from "@/lib/translation";
 import { FORMAT_LABELS, MERCATO_LABELS, MODULES } from "@/lib/editorial";
 import { SITE_URL } from "@/lib/util";
 
@@ -86,6 +87,7 @@ export default async function EditArticle({ params }: { params: Promise<{ id: st
         cover: byId(a.coverId),
         ogImage: byId(a.ogImageId),
         galleryItems: a.gallery.map((g) => byId(g)).filter(Boolean),
+        english: { title: a.enTitle, dek: a.enDek, text: htmlToText(a.enBodyHtml), published: a.enPublished },
       })}
       perms={{
         edit: canEditArticle(actor, ref),

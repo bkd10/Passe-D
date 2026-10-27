@@ -78,6 +78,20 @@
       "when": 1792850000000,
       "tag": "0010_recruteur",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792860000000,
+      "tag": "0011_version_anglaise",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1792870000000,
+      "tag": "0012_ballon_dor_anglais",
+      "breakpoints": true
     }
   ]
 }

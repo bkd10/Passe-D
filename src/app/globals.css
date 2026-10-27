@@ -2061,3 +2061,24 @@ figcaption,
 .feed-layout > * {
   min-width: 0;
 }
+
+/* Lien vers l'autre langue d'un article (« Read in English » / « Lire en français ») */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.byline a.lang-switch:hover {
+  border-color: var(--fg-3);
+}
+.icon-btn.lang-btn {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Card, FullArticle } from "@/lib/queries";
 import { ArticleCard } from "./card";
 import { FORMAT_LABELS, MERCATO_LABELS, moduleBySlug } from "@/lib/editorial";
-import { formatDate, formatDateTime, SITE_URL } from "@/lib/util";
+import { formatDate, formatDateTime, readingMinutes, SITE_URL } from "@/lib/util";
 import { ShareButtons } from "./share";
 import { ViewTracker } from "./view-tracker";
 import type { MercatoStatus } from "@/db/schema";
@@ -19,28 +19,33 @@ export function videoEmbed(url: string): { kind: "iframe" | "video"; src: string
   return null;
 }
 
-export function ArticleView({ a, related, preview = false }: { a: FullArticle; related: Card[]; preview?: boolean }) {
-  const art = a.article;
+const enDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" });
+
+/** `lang="en"` affiche la version anglaise publiée de l'article (titre, chapô, texte traduits). */
+export function ArticleView({ a, related, preview = false, lang = "fr" }: { a: FullArticle; related: Card[]; preview?: boolean; lang?: "fr" | "en" }) {
+  const en = lang === "en";
+  const art = en ? { ...a.article, title: a.article.enTitle, dek: a.article.enDek, bodyHtml: a.article.enBodyHtml } : a.article;
+  const hasEnglish = !en && a.article.enPublished && !!a.article.enTitle;
   const mod = art.module ? moduleBySlug(art.module) : null;
   const video = videoEmbed(art.videoUrl);
   const mercato = art.mercatoStatus ? MERCATO_LABELS[art.mercatoStatus as MercatoStatus] : null;
-  const url = `${SITE_URL}/articles/${art.slug}`;
+  const url = `${SITE_URL}${en ? "/en" : ""}/articles/${art.slug}`;
   const cover = a.cover;
   const coverSrc = cover ? cover.variants?.lg || cover.url : null;
 
   return (
-    <article style={{ ["--cat" as string]: a.category?.color ?? undefined }}>
+    <article lang={en ? "en" : undefined} style={{ ["--cat" as string]: a.category?.color ?? undefined }}>
       {!preview && <ViewTracker id={art.id} />}
       <div className="wrap">
         <header className="article-head">
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <span className="kicker">
               <span className="dot" />
-              {a.category ? <Link href={`/${a.category.slug}`}>{a.category.name}</Link> : "Passe D"}
-              {mod ? ` · ${mod.name}` : art.format !== "article" ? ` · ${FORMAT_LABELS[art.format]}` : ""}
+              {en ? <Link href="/en">Passe D · In English</Link> : a.category ? <Link href={`/${a.category.slug}`}>{a.category.name}</Link> : "Passe D"}
+              {en ? "" : mod ? ` · ${mod.name}` : art.format !== "article" ? ` · ${FORMAT_LABELS[art.format]}` : ""}
             </span>
-            {art.sponsored && <span className="badge sponsor">Contenu sponsorisé{art.sponsorName ? ` · ${art.sponsorName}` : ""}</span>}
-            {mercato && <span className={`badge ${mercato.tone === "lime" ? "lime-soft" : mercato.tone}`}>{mercato.label}</span>}
+            {art.sponsored && <span className="badge sponsor">{en ? "Sponsored content" : "Contenu sponsorisé"}{art.sponsorName ? ` · ${art.sponsorName}` : ""}</span>}
+            {mercato && !en && <span className={`badge ${mercato.tone === "lime" ? "lime-soft" : mercato.tone}`}>{mercato.label}</span>}
           </div>
           <h1 className="headline">{art.title}</h1>
           {art.dek && <p className="dek">{art.dek}</p>}
@@ -49,10 +54,10 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
               <span className="who">
                 {a.author.avatarUrl ? <img className="avatar" src={a.author.avatarUrl} alt="" /> : null}
                 <span>
-                  Par <Link href={`/auteurs/${a.author.slug}`}>{a.author.name}</Link>
+                  {en ? "By" : "Par"} <Link href={`/auteurs/${a.author.slug}`}>{a.author.name}</Link>
                   {a.contributors.length > 0 && (
                     <>
-                      {" avec "}
+                      {en ? " with " : " avec "}
                       {a.contributors.map((c, i) => (
                         <span key={c.id}>
                           {i > 0 && ", "}
@@ -65,13 +70,23 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
               </span>
             )}
             <span className="meta">
-              {art.publishedAt ? <time dateTime={art.publishedAt.toISOString()}>{formatDate(art.publishedAt)}</time> : "Non publié"}
-              {art.updatedContentAt && art.publishedAt && art.updatedContentAt.getTime() - art.publishedAt.getTime() > 3600_000 && (
+              {art.publishedAt ? <time dateTime={art.publishedAt.toISOString()}>{en ? enDate.format(art.publishedAt) : formatDate(art.publishedAt)}</time> : "Non publié"}
+              {!en && art.updatedContentAt && art.publishedAt && art.updatedContentAt.getTime() - art.publishedAt.getTime() > 3600_000 && (
                 <> · Mis à jour le {formatDateTime(art.updatedContentAt)}</>
               )}
               {" · "}
-              {art.readingMinutes} min de lecture
+              {en ? `${readingMinutes(art.bodyHtml)} min read` : `${art.readingMinutes} min de lecture`}
             </span>
+            {hasEnglish && (
+              <Link href={`/en/articles/${art.slug}`} hrefLang="en" lang="en" className="lang-switch">
+                Read in English
+              </Link>
+            )}
+            {en && (
+              <Link href={`/articles/${art.slug}`} hrefLang="fr" lang="fr" className="lang-switch">
+                Lire en français
+              </Link>
+            )}
             <div className="share">
               <ShareButtons url={url} title={art.title} />
             </div>
@@ -115,7 +130,7 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
         <div className="article-layout">
           <div />
           <div className="prose-col">
-            {art.status === "archived" && (
+            {art.status === "archived" && !en && (
               <p className="notice archive-note">
                 <strong>Archive</strong> Cet article a été publié le {formatDateTime(art.publishedAt!)} et n&apos;est plus mis à jour.
               </p>
@@ -123,7 +138,7 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
             <div className="prose" dangerouslySetInnerHTML={{ __html: art.bodyHtml }} />
           </div>
           <aside className="article-aside">
-            {mercato && (
+            {mercato && !en && (
               <div className="notice">
                 <strong>Statut mercato</strong>
                 <span className={`badge ${mercato.tone === "lime" ? "lime-soft" : mercato.tone}`}>{mercato.label}</span>
@@ -148,8 +163,8 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
             )}
             {art.sponsored && (
               <div className="notice">
-                <strong>Contenu sponsorisé</strong>
-                Ce contenu a été réalisé en partenariat{art.sponsorName ? ` avec ${art.sponsorName}` : ""}. Il est distinct du travail indépendant de la rédaction.
+                <strong>{en ? "Sponsored content" : "Contenu sponsorisé"}</strong>
+                {en ? `This content was produced in partnership${art.sponsorName ? ` with ${art.sponsorName}` : ""}. It is separate from the newsroom's independent work.` : <>Ce contenu a été réalisé en partenariat{art.sponsorName ? ` avec ${art.sponsorName}` : ""}. Il est distinct du travail indépendant de la rédaction.</>}
               </div>
             )}
           </aside>
@@ -187,7 +202,7 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
         </div>
       )}
 
-      <div className="wrap">
+      {!en && <div className="wrap">
         <div className="article-foot">
           {a.corrections.length > 0 && (
             <div className="notice" style={{ marginBottom: 16 }}>
@@ -215,7 +230,7 @@ export function ArticleView({ a, related, preview = false }: { a: FullArticle; r
             </div>
           )}
         </div>
-      </div>
+      </div>}
 
       {related.length > 0 && (
         <div className="wrap">

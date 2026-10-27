@@ -18,6 +18,7 @@ export function cleanArticleHtml(html: string): string {
       span: ["class"],
       figure: ["class"],
       p: ["class"],
+      ol: ["start"],
     },
     allowedClasses: {
       div: ["callout", "embed"],

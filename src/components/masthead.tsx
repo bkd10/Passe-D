@@ -51,6 +51,11 @@ export function Masthead({ cats, ticker }: { cats: NavCat[]; ticker: { slug: str
           ))}
         </nav>
         <div className="masthead-tools">
+          {pathname === "/en" || pathname.startsWith("/en/") ? (
+            <Link href="/" className="icon-btn lang-btn" hrefLang="fr" lang="fr" aria-label="Version française">FR</Link>
+          ) : (
+            <Link href="/en" className="icon-btn lang-btn" hrefLang="en" lang="en" aria-label="English version">EN</Link>
+          )}
           <Link href="/recherche" className="icon-btn" aria-label="Rechercher">
             <SearchIcon />
           </Link>
