@@ -146,7 +146,7 @@ const slug = "le-gardien-de-bondy-qui-arrete-tout";
 await pp.goto(`${BASE}/articles/${slug}`);
 assert.ok(await pp.locator("h1:has-text('Le gardien de Bondy')").isVisible());
 assert.ok(await pp.locator(".prose h2:has-text('Un réflexe hors norme')").isVisible());
-const ld = await pp.locator("script[type='application/ld+json']").first().textContent();
+const ld = (await pp.locator("script[type='application/ld+json']").allTextContents()).join("\n");
 assert.match(ld, /NewsArticle/);
 assert.ok(await pp.locator("link[rel=canonical]").count());
 log("page article + données structurées + canonique");
@@ -174,7 +174,12 @@ assert.equal(jpg.headers()["content-type"], "image/jpeg");
 assert.equal((await jpg.body()).subarray(0, 2).toString("hex"), "ffd8");
 const reseaux = await (await pp.request.get(`${BASE}/reseaux.xml`)).text();
 assert.ok(reseaux.includes(`/articles/${slug}/visuel?format=post&amp;type=jpg`) && reseaux.includes("lien en bio") && reseaux.includes("#PasseD"));
-log("visuels réseaux sociaux (Instagram, story, aperçu de lien, JPEG) + flux RSS illustré + flux réseaux");
+const news = await (await pp.request.get(`${BASE}/news-sitemap.xml`)).text();
+assert.ok(news.includes(`/articles/${slug}</loc>`) && news.includes("<news:language>fr</news:language>"));
+assert.ok((await (await pp.request.get(`${BASE}/robots.txt`)).text()).includes("news-sitemap.xml"));
+const ldOrg = await (await pp.request.get(`${BASE}/articles/${slug}`)).text();
+assert.ok(ldOrg.includes('"NewsMediaOrganization"') && ldOrg.includes("/logo.png"));
+log("visuels réseaux sociaux (Instagram, story, aperçu de lien, JPEG) + flux RSS illustré + flux réseaux + Google (sitemap actualités, données structurées)");
 
 // 8. Programmation d'un second article
 const created = await page.request.post(`${BASE}/admin/articles/nouveau`).catch(() => null);
