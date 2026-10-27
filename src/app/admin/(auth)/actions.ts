@@ -49,13 +49,18 @@ export async function setupAction(_: FormState, fd: FormData): Promise<FormState
   if (name.length < 2 || !/^\S+@\S+\.\S+$/.test(email)) return { error: "Nom et e-mail valides requis." };
   const pwErr = validatePassword(password);
   if (pwErr) return { error: pwErr };
-  const [u] = await db
-    .insert(schema.users)
-    .values({ name, email, slug: slugify(name), role: "admin", passwordHash: await hashPassword(password) })
-    .returning();
-  await seedDefaults(u.id);
-  await createSession(u.id);
-  await audit(u.id, "setup", "user", u.id);
+  try {
+    const [u] = await db
+      .insert(schema.users)
+      .values({ name, email, slug: slugify(name), role: "admin", passwordHash: await hashPassword(password) })
+      .returning();
+    await seedDefaults(u.id);
+    await createSession(u.id);
+    await audit(u.id, "setup", "user", u.id);
+  } catch (e) {
+    console.error("setup", e);
+    return { error: "La création du compte a échoué. Rechargez la page : si l'écran de connexion s'affiche, le compte existe déjà." };
+  }
   redirect("/admin?bienvenue=1");
 }
 
