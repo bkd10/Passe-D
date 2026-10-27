@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/util";
 
 export const dynamic = "force-dynamic";
 
-/** Visuel réseaux sociaux d'un article publié : ?format=post (Instagram), story ou og (aperçu de lien). &type=jpg pour la publication automatique Instagram, qui n'accepte que le JPEG. */
+/** Visuel réseaux sociaux d'un article publié : ?format=post (Instagram), story ou og (aperçu de lien) ; &lang=en pour la version anglaise. &type=jpg pour la publication automatique Instagram, qui n'accepte que le JPEG. */
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const url = new URL(req.url);
@@ -13,10 +13,14 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   if (!(format in SOCIAL_FORMATS)) return new Response("Format inconnu.", { status: 400 });
   const a = await getPublicArticle(slug);
   if (!a) return new Response("Article introuvable.", { status: 404 });
+  // &lang=en : visuel de la version anglaise, si elle est publiée.
+  const en = url.searchParams.get("lang") === "en";
+  if (en && !(a.article.enPublished && a.article.enTitle)) return new Response("Pas de version anglaise publiée.", { status: 404 });
   const img = await socialImage(
     {
-      title: a.article.title,
-      dek: a.article.dek,
+      title: en ? a.article.enTitle : a.article.title,
+      dek: en ? a.article.enDek : a.article.dek,
+      lang: en ? "en" : "fr",
       categoryName: a.category?.name,
       mercatoStatus: a.article.mercatoStatus,
       sponsored: a.article.sponsored,
@@ -28,7 +32,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   const jpg = url.searchParams.get("type") === "jpg";
   const headers = new Headers(img.headers);
   headers.set("Cache-Control", "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400");
-  if (url.searchParams.has("download")) headers.set("Content-Disposition", `attachment; filename="passe-d-${slug}-${format}.${jpg ? "jpg" : "png"}"`);
+  if (url.searchParams.has("download")) headers.set("Content-Disposition", `attachment; filename="passe-d-${slug}${en ? "-en" : ""}-${format}.${jpg ? "jpg" : "png"}"`);
   if (!jpg) return new Response(img.body, { status: 200, headers });
   const out = await sharp(Buffer.from(await img.arrayBuffer())).jpeg({ quality: 90 }).toBuffer();
   headers.set("Content-Type", "image/jpeg");

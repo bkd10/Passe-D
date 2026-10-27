@@ -18,6 +18,7 @@ type Input = {
   title: string;
   dek?: string | null;
   categoryName?: string | null;
+  lang?: "fr" | "en";
   mercatoStatus?: string | null;
   sponsored?: boolean;
   cover?: { url: string; storageKey: string | null } | null;
@@ -79,7 +80,10 @@ export async function socialImage(input: Input, format: SocialFormat) {
   const photoW = isOg ? 640 : width;
   const photo = await coverData(a.cover, photoW, photoH);
   const status = a.mercatoStatus ? MERCATO_LABELS[a.mercatoStatus as MercatoStatus]?.label : null;
-  const kicker = [a.sponsored ? "Partenariat" : null, status ?? a.categoryName ?? "Passe D"].filter(Boolean).join(" · ");
+  const en = a.lang === "en";
+  const kicker = en
+    ? [a.sponsored ? "Sponsored" : null, "In English"].filter(Boolean).join(" · ")
+    : [a.sponsored ? "Partenariat" : null, status ?? a.categoryName ?? "Passe D"].filter(Boolean).join(" · ");
   const pad = isOg ? 56 : 72;
 
   const brand = (
@@ -112,7 +116,7 @@ export async function socialImage(input: Input, format: SocialFormat) {
   const footer = (
     <div style={{ display: "flex", alignItems: "center", gap: 18, fontFamily: "Mono", fontSize: isOg ? 18 : 24, letterSpacing: 2, color: "#bdbdb6" }}>
       <div style={{ display: "flex", width: 56, height: 4, background: GOLD }} />
-      {format === "story" ? "LIEN EN BIO" : a.siteHost.toUpperCase()}
+      {format === "story" ? (en ? "LINK IN BIO" : "LIEN EN BIO") : a.siteHost.toUpperCase()}
     </div>
   );
   const fallback = (w: number, h: number) => (

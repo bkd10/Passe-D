@@ -199,11 +199,15 @@ assert.ok(frHtml.includes("Read in English") && /hreflang="en" href="[^"]*\/en\/
 const enHome = await (await pp.request.get(`${BASE}/en`)).text();
 assert.ok(enHome.includes("A 17-year-old keeper nobody knows yet") && enHome.includes("Harry Kane crowned the best player in the world"));
 assert.ok((await (await pp.request.get(`${BASE}/sitemap.xml`)).text()).includes(`/en/articles/${slug}`));
+const enVisual = await pp.request.get(`${BASE}/articles/${slug}/visuel?format=post&lang=en`);
+assert.equal(enVisual.status(), 200);
+assert.equal(enVisual.headers()["content-type"], "image/png");
 await page.goto(`${BASE}/admin/articles/${artId}`);
 assert.equal(await page.inputValue("#en-title"), enData.title);
 assert.ok((await page.inputValue("#en-text")).includes("## Reflexes") && (await page.inputValue("#en-text")).includes("[Read more](https://example.com)"));
 r = await page.request.put(`${BASE}/api/admin/articles/${artId}/english`, { headers: H, data: { ...enData, published: false } });
 assert.equal((await pp.request.get(`${BASE}/en/articles/${slug}`)).status(), 404);
+assert.equal((await pp.request.get(`${BASE}/articles/${slug}/visuel?lang=en`)).status(), 404);
 log("version anglaise : droits serveur, page /en, liens entre langues, hreflang, sitemap, dépublication");
 
 // 8. Programmation d'un second article
