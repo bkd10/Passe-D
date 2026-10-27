@@ -71,6 +71,13 @@
       "when": 1792840000000,
       "tag": "0009_ballon_dor_classement",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792850000000,
+      "tag": "0010_recruteur",
+      "breakpoints": true
     }
   ]
 }
