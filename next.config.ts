@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Polices utilisées pour fabriquer les visuels réseaux sociaux
   outputFileTracingIncludes: { "/**/*": ["./assets/fonts/**"] },
+  // Le chemin des fichiers importés (process.cwd() + variable) fait embarquer tout le dossier du projet
+  // dans chaque fonction : on exclut ce qui ne sert pas en ligne (cache de build, base locale, git, tests).
+  outputFileTracingExcludes: { "/**/*": [".next/cache/**", ".data/**", ".git/**", "tests/**", "tsconfig.tsbuildinfo"] },
   async redirects() {
     // Anciennes adresses de passe-d.net
     return [
