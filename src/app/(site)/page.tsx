@@ -34,7 +34,8 @@ function SectionHead({ num, title, sub, href, more = "Tout voir" }: { num: strin
 export default async function Home() {
   const [featured, latest, cats, talent, mercato, figure, videos, amateur, metiers, innovations, invisible, popular, poll, figureSetting] =
     await Promise.all([
-      listPublic({ featured: true, limit: 1 }),
+      // « À la une » ne garde un article mis en avant que 48 h : ensuite, c'est le plus récent qui prend la place.
+      listPublic({ featured: true, limit: 1, since: new Date(Date.now() - 48 * 3600_000) }),
       listPublic({ limit: 12 }),
       navCategories(),
       listPublic({ module: "talent-a-suivre", limit: 2 }),
