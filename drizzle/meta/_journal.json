@@ -169,6 +169,13 @@
       "when": 1792980000000,
       "tag": "0023_liste_zidane",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1792990000000,
+      "tag": "0024_liste_zidane_officielle",
+      "breakpoints": true
     }
   ]
 }
