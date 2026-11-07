@@ -176,6 +176,13 @@
       "when": 1792990000000,
       "tag": "0024_liste_zidane_officielle",
       "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1793000000000,
+      "tag": "0025_retraite_cr7",
+      "breakpoints": true
     }
   ]
 }
