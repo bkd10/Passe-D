@@ -108,7 +108,7 @@ export async function socialImage(input: Input, format: SocialFormat) {
     </div>
   );
   // Le chapô n'apparaît que s'il reste de la place sous le titre.
-  const dekText = a.dek && a.dek.length > 110 ? `${a.dek.slice(0, 107).replace(/\s+\S*$/, "")}…` : a.dek;
+  const dekText = a.dek && a.dek.length > 110 ? `${a.dek.slice(0, 107).replace(/\s+\S*$/, "").replace(/[\s.,;:!?…]+$/, "")}…` : a.dek;
   const room = format === "story" ? 220 : 170;
   const dek = !isOg && dekText && a.title.length + dekText.length <= room ? (
     <div style={{ display: "flex", fontFamily: "Sans", fontSize: format === "story" ? 40 : 34, lineHeight: 1.3, color: "#c9c9c2" }}>{dekText}</div>

@@ -183,6 +183,13 @@
       "when": 1793000000000,
       "tag": "0025_retraite_cr7",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1793010000000,
+      "tag": "0026_articles_10_novembre",
+      "breakpoints": true
     }
   ]
 }
