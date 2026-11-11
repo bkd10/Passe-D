@@ -34,6 +34,15 @@ export async function readObject(url: string, key: string): Promise<Buffer> {
     const { readFile } = await import("node:fs/promises");
     return readFile(path.join(LOCAL_DIR, key));
   }
+  // Image servie par le site lui-même (dossier public/, ex. /medias/...) : lue sur le disque si présente, sinon via l'URL publique.
+  if (url.startsWith("/")) {
+    const { readFile } = await import("node:fs/promises");
+    try {
+      return await readFile(path.join(process.cwd(), "public", url));
+    } catch {
+      url = `${(process.env.NEXT_PUBLIC_SITE_URL || "https://www.passe-d.net").replace(/\/$/, "")}${url}`;
+    }
+  }
   const res = await fetch(url);
   if (!res.ok) throw new Error("Fichier source introuvable.");
   return Buffer.from(await res.arrayBuffer());

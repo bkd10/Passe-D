@@ -204,6 +204,13 @@
       "when": 1793030000000,
       "tag": "0028_brio_titre_amical",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1793040000000,
+      "tag": "0029_brio_photo_compo",
+      "breakpoints": true
     }
   ]
 }
