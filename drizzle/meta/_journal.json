@@ -218,6 +218,13 @@
       "when": 1793050000000,
       "tag": "0030_matchs_jeunes_week_end",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1793060000000,
+      "tag": "0031_matchs_jeunes_idf",
+      "breakpoints": true
     }
   ]
 }
