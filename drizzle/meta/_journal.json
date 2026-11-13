@@ -225,6 +225,13 @@
       "when": 1793060000000,
       "tag": "0031_matchs_jeunes_idf",
       "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1793070000000,
+      "tag": "0032_meilleurs_jeunes_camara",
+      "breakpoints": true
     }
   ]
 }
