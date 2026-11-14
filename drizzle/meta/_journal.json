@@ -232,6 +232,13 @@
       "when": 1793070000000,
       "tag": "0032_meilleurs_jeunes_camara",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1793080000000,
+      "tag": "0033_camara_photo_atletico",
+      "breakpoints": true
     }
   ]
 }
